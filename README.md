@@ -1,2 +1,2 @@
 # WMS
-Wareghouse Inventory Management System
+A full stack web application for Warehouse Inventory Management System
