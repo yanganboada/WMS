@@ -1,0 +1,47 @@
+body {
+  font-family: 'Karla', sans-serif;
+  color: #1d3557;
+}
+
+
+.navbar {
+  background-color: #A8DADC;
+}
+
+button {
+  font-size: 1rem;
+  font-weight: 600;
+  width: 150px;
+  height: 32px;
+  color: white;
+  border: none;
+  opacity: 1;
+}
+
+button:hover {
+  opacity: .90;
+}
+
+.btn-grey:hover{
+  opacity: 1;
+}
+
+.btn-blue {
+  border-radius: 12px;
+  background-color: #45789D;
+}
+
+.btn-red {
+  border-radius: 12px;
+  background-color: #E63946;
+}
+
+.btn-green {
+  border-radius: 12px;
+  background-color: #04724D;
+}
+
+.btn-grey {
+  border-radius: 12px;
+  background-color: #9A99A2;
+}
