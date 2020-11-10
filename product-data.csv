@@ -1,12 +1,12 @@
-sku,status,name,color,qty,supplier,category,cost,shippingCost,size,location,imageUrl
-NL01G,TRUE,4 Side Bar Gold,gold,345,Yiwu Basic Stainless,Necklace,7.5,0.15,45x5mm 45+5mm,CDC5X3,/images/NL01G.jpg
-NL01R,TRUE,4 Side Bar Rose Gold,rose gold,234,Yiwu Basic Stainless,Necklace,8,0.15,45x5mm 45+5mm,CFD2Q5,/images/NL01R.jpg
-NL02G,TRUE,Bar Necklace Gold,gold,2,Yiwu Basic Stainless,Necklace,6.9,0.15,40x7mm 40+5mm,XMD3G8,/images/NL02G.jpg
-NL02R,TRUE,Bar Rose Gold,gold,4,Yiwu Basic Stainless,Necklace,7.7,0.14,40x7mm 40+5mm,MSC5D2,/images/NL02R.jpg
-NL02S,TRUE,Bar Silver,gold,1,Yiwu Basic Stainless,Necklace,4.2,0.15,40x7mm 40+5mm,SKO4C9,/images/NL02S.jpg
-NL03S,TRUE,Cross Necklace Silver,silver,435,Yiwu Basic Stainless,Necklace,4.9,0.15,40x7mm 40+5mm,SMI4C8,/images/NL03S.jpg
-NL04S,TRUE,Compass Necklace Silver,silver,23,Yiwu Basic Stainless,Necklace,4.8,0.37,40x7mm 40+5mm,SDC6E9,/images/NL04S.jpg
-P001,TRUE,Black Jewelry Box,black,12,jpb box & Zhihua Packaging,Packaging,1.3,0.15,3.5inchx3.5inch,KSF9G4,/images/P001.jpg
-PT01B,TRUE,Black Bone Tag,black,6,Jienuo Stainless,Dog Tag,2.55,0.85,40*22mm,KWG5C3,/images/PT01B.jpg
-NL05W,TRUE,Pearl Necklace,white,4,Lazy Cat Alex,Necklace,14,0.15,8mm Dia 40+5mm,VAS3J9,/images/NL05W.jpeg
-NL05P,FALSE,Pearl Necklace,pink,3,Lazy Cat Alex,Necklace,14,0.15,8mm Dia 40+5mm,OWV3D9,/images/NL05P.jpg
+productId,sku,status,name,color,qty,supplierId,categoryId,cost,shippingCost,size,location,imageUrl
+1,NL01G,TRUE,4 Side Bar Gold,gold,345,1,1,7.5,0.15,45x5mm 45+5mm,CDC5X3,/images/NL01G.jpg
+2,NL01R,TRUE,4 Side Bar Rose Gold,rose gold,234,1,1,8,0.15,45x5mm 45+5mm,CFD2Q5,/images/NL01R.jpg
+3,NL02G,TRUE,Bar Necklace Gold,gold,2,1,1,6.9,0.15,40x7mm 40+5mm,XMD3G8,/images/NL02G.jpg
+4,NL02R,TRUE,Bar Rose Gold,gold,4,1,1,7.7,0.14,40x7mm 40+5mm,MSC5D2,/images/NL02R.jpg
+5,NL02S,TRUE,Bar Silver,gold,1,1,1,4.2,0.15,40x7mm 40+5mm,SKO4C9,/images/NL02S.jpg
+6,NL03S,TRUE,Cross Necklace Silver,silver,435,1,1,4.9,0.15,40x7mm 40+5mm,SMI4C8,/images/NL03S.jpg
+7,NL04S,TRUE,Compass Necklace Silver,silver,23,1,1,4.8,0.37,40x7mm 40+5mm,SDC6E9,/images/NL04S.jpg
+8,P001,TRUE,Black Jewelry Box,black,12,2,2,1.3,0.15,3.5inchx3.5inch,KSF9G4,/images/P001.jpg
+9,PT01B,TRUE,Black Bone Tag,black,6,3,3,2.55,0.85,40*22mm,KWG5C3,/images/PT01B.jpg
+10,NL05W,TRUE,Pearl Necklace,white,4,4,1,14,0.15,8mm Dia 40+5mm,VAS3J9,/images/NL05W.jpeg
+11,NL05P,FALSE,Pearl Necklace,pink,3,4,1,14,0.15,8mm Dia 40+5mm,OWV3D9,/images/NL05P.jpg
