@@ -51,9 +51,10 @@ button:hover {
 }
 
 .table-header {
-  background-color: #C9E4DE
+  background-color: #C9E4DE;
+  font-size: 12px;
 }
 
 .tbody-container {
-  font-size: 15px;
+  font-size: 12px;
 }
