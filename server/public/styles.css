@@ -1,6 +1,7 @@
 body {
   font-family: 'Karla', sans-serif;
   color: #1d3557;
+  padding-top: 60px;
 }
 
 .navbar {
@@ -49,10 +50,10 @@ button:hover {
   max-width: 30%;
 }
 
-/* .form-input-box {
-  max-width: 60%
-} */
-
 .table-header {
   background-color: #C9E4DE
+}
+
+.tbody-container {
+  font-size: 15px;
 }

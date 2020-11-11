@@ -5,12 +5,12 @@ export default class Header extends React.Component {
   render() {
     return (
       <div>
-        <nav className="navbar">
+        <nav className="navbar fixed-top">
           <div className="navbar-brand">
-            <i className="fas fa-bars fa-2x"></i>
+            <i className="fas fa-bars"></i>
           </div>
           <span>
-            <h3>Name</h3>
+            <h4>Name</h4>
           </span>
         </nav>
       </div>
