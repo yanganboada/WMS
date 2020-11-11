@@ -1,4 +1,5 @@
 import React from 'react';
+import Table from './table';
 
 export default class ProductList extends React.Component {
 
@@ -27,6 +28,9 @@ export default class ProductList extends React.Component {
             <input type="text" className="form-control" placeholder="Example input"></input>
           </div>
         </div>
+
+        <Table product={this.props.product} />
+
       </div>
 
     );

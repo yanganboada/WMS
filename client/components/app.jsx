@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
-import Table from './table';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -53,8 +52,7 @@ export default class App extends React.Component {
       return (
         <div>
           <Header/>
-          <ProductList setView={this.setView} />
-          <Table product={this.state.product}/>
+          <ProductList setView={this.setView} product={this.state.product} />
         </div>
       );
     }
