@@ -44,3 +44,15 @@ button:hover {
   border-radius: 12px;
   background-color: #9A99A2;
 }
+
+.form-drop-down {
+  max-width: 30%;
+}
+
+/* .form-input-box {
+  max-width: 60%
+} */
+
+.table-header {
+  background-color: #C9E4DE
+}
