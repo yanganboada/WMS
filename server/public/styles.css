@@ -1,6 +1,7 @@
 body {
   font-family: 'Karla', sans-serif;
   color: #1d3557;
+  padding-top: 60px;
 }
 
 .navbar {
@@ -43,4 +44,16 @@ button:hover {
 .btn-grey {
   border-radius: 12px;
   background-color: #9A99A2;
+}
+
+.form-drop-down {
+  max-width: 30%;
+}
+
+.table-header {
+  background-color: #C9E4DE
+}
+
+.tbody-container {
+  font-size: 15px;
 }
