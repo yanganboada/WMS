@@ -30,7 +30,16 @@ export default class ProductDtails extends React.Component {
   }
 
   toggleStatusClick(e) {
-    console.log(e);
+    this.state.product.status = !this.state.product.status;
+    this.setState({ product: this.state.product });
+    fetch(`/api/products/${this.props.params.productId}`, {
+      method: 'PUT'
+    })
+      .then(res => res.json())
+      .then(res => {
+        this.setState({ product: res });
+      })
+      .catch(err => console.error(err));
   }
 
   render() {
