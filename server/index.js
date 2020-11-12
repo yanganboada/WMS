@@ -92,7 +92,7 @@ app.get('/api/products/:productId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.put('/api/products/:productId', (req, res, next) => {
+app.patch('/api/products/:productId', (req, res, next) => {
   const productId = parseInt(req.params.productId, 10);
   if (!Number.isInteger(productId) || productId <= 0) {
     return res.status(400).json({
@@ -115,6 +115,46 @@ app.put('/api/products/:productId', (req, res, next) => {
         next(new ClientError(`"productId" ${productId} does not in the database`, 404));
       } else {
         res.status(200).json(result.rows[0]);
+      }
+    })
+    .catch(err => next(err));
+});
+
+app.put('/api/products/:productId', (req, res, next) => {
+  const productId = parseInt(req.params.productId, 10);
+  if (!Number.isInteger(productId) || productId <= 0) {
+    return res.status(400).json({
+      error: '"productId" must be a positive integer'
+    });
+  }
+
+  const { sku, name, qty, supplierId, categoryId, cost, shippingCost, size, location, color, status, imageUrl } = req.body;
+
+  const sql = `
+    update "products"
+    SET "sku" = $2,
+        "name" = $3,
+        "qty" = $4,
+        "supplierId" = $5,
+        "categoryId" = $6,
+        "cost" = $7,
+        "shippingCost" = $8,
+        "size" = $9,
+        "location" = $10,
+        "color" = $11,
+        "imageUrl" =$12
+    where "productId" = $1
+    returning *
+  `;
+
+  const values = [req.params.productId, sku, name, qty, supplierId, categoryId, cost, shippingCost, size, location, color, imageUrl];
+
+  db.query(sql, values)
+    .then(result => {
+      if (result.rowCount === 0) {
+        next(new ClientError(`"productId" ${productId} does not in the database`, 404));
+      } else {
+        res.status(204).json(result.rows[0]);
       }
     })
     .catch(err => next(err));
