@@ -3,14 +3,21 @@ import React from 'react';
 export default class Table extends React.Component {
   constructor(props) {
     super(props);
-    this.renderTableData = this.renderTableData.bind(this);
+    this.state = {
+      index: null
+    }
+    this.handleItemClick = this.handleItemClick.bind(this);
+  }
+
+  handleItemClick(index) {
+    this.props.setView('productDetails', this.props.product[index]);
   }
 
   renderTableData() {
     return this.props.product.map((product, index) => {
-      const { sku, name, category, qty } = product;
+      const { productId, sku, name, category, qty } = product;
       return (
-        <tr key={index}>
+        <tr className="cursor" key={index} onClick={() => this.handleItemClick(index)}>
           <td>{sku}</td>
           <td>{name}</td>
           <td>{category}</td>

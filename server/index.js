@@ -21,7 +21,8 @@ app.get('/api/health-check', (req, res, next) => {
 
 app.get('/api/products', (req, res, next) => {
   const sql = `
-    select "p"."sku",
+    select "p"."productId",
+           "p"."sku",
            "p"."name",
            "c"."categoryName" as "category",
            "p"."qty"
