@@ -38,6 +38,31 @@ app.get('/api/products', (req, res, next) => {
 
 });
 
+
+app.post('/api/products', (req, res, next) => {
+  const { sku, name, qty, supplierId, categoryId, cost, shippingCost, size, location, color, status, imageUrl } = req.body;
+
+  const insertSql = `
+    insert into "products" ("sku", "name", "qty", "supplierId", "categoryId", "cost", "shippingCost", "size", "location", "color", "status", "imageUrl")
+      values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+      returning "sku", "name", "qty", "supplierId", "categoryId", "cost", "shippingCost", "size", "location", "color", "status", "imageUrl"
+    `;
+
+  const insertSqlValues = [sku, name, qty, supplierId, categoryId, cost, shippingCost, size, location, color, status, imageUrl];
+
+  for (let i = 0; i < insertSqlValues.length; i++) {
+    if (!insertSqlValues[i]) {
+      return res.status(400).json({ error: 'Please fill out the entire form' });
+    }
+  }
+
+  db.query(insertSql, insertSqlValues)
+    .then(result => {
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => console.error(err));
+  });
+
 app.get('/api/products/:productId', (req, res, next) => {
   const productId = parseInt(req.params.productId, 10);
   if (!Number.isInteger(productId) || productId <= 0) {
@@ -65,6 +90,7 @@ app.get('/api/products/:productId', (req, res, next) => {
       }
     })
     .catch(err => next(err));
+
 
 });
 
