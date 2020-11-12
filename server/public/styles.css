@@ -1,11 +1,22 @@
 body {
   font-family: 'Karla', sans-serif;
-  color: #1d3557;
   padding-top: 60px;
+}
+
+h1, h2, h3, h4, h5, h6, p, div {
+  color: #1d3557;
+}
+
+.grey-background{
+  background-color: #f2f2f2;
 }
 
 .navbar {
   background-color: #A8DADC;
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 button {
