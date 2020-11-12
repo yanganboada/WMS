@@ -33,7 +33,7 @@ export default class ProductDtails extends React.Component {
     this.state.product.status = !this.state.product.status;
     this.setState({ product: this.state.product });
     fetch(`/api/products/${this.props.params.productId}`, {
-      method: 'PUT'
+      method: 'PATCH'
     })
       .then(res => res.json())
       .then(res => {
