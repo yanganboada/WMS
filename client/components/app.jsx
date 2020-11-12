@@ -7,7 +7,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'homepage',
+        name: 'productList',
         params: {}
       },
       product: []

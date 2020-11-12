@@ -38,6 +38,7 @@ app.get('/api/products', (req, res, next) => {
 
 });
 
+
 app.post('/api/products', (req, res, next) => {
   const { sku, name, qty, supplierId, categoryId, cost, shippingCost, size, location, color, status, imageUrl } = req.body;
 
@@ -60,6 +61,37 @@ app.post('/api/products', (req, res, next) => {
       res.status(201).json(result.rows[0]);
     })
     .catch(err => console.error(err));
+  });
+
+app.get('/api/products/:productId', (req, res, next) => {
+  const productId = parseInt(req.params.productId, 10);
+  if (!Number.isInteger(productId) || productId <= 0) {
+    return res.status(400).json({
+      error: '"productId" must be a positive integer'
+    });
+  }
+
+  const sql = `
+    select *
+      from "products"
+      join "category" as "c" using ("categoryId")
+      join "supplier" as "s" using ("supplierId")
+    where "productId" = $1
+  `;
+
+  const values = [req.params.productId];
+
+  db.query(sql, values)
+    .then(result => {
+      if (result.rowCount === 0) {
+        next(new ClientError(`"productId" ${productId} does not in the database`, 404));
+      } else {
+        res.status(200).json(result.rows[0]);
+      }
+    })
+    .catch(err => next(err));
+
+
 });
 
 app.use('/api', (req, res, next) => {
