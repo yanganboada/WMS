@@ -5,7 +5,7 @@ export default class Table extends React.Component {
     super(props);
     this.state = {
       index: null
-    }
+    };
     this.handleItemClick = this.handleItemClick.bind(this);
   }
 

@@ -2,8 +2,8 @@ import React from 'react';
 import Table from './table';
 
 export default class ProductList extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
   }
 
   render() {
