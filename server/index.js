@@ -38,7 +38,6 @@ app.get('/api/products', (req, res, next) => {
 
 });
 
-
 app.post('/api/products', (req, res, next) => {
   const { sku, name, qty, supplierId, categoryId, cost, shippingCost, size, location, color, status, imageUrl } = req.body;
 
@@ -50,10 +49,17 @@ app.post('/api/products', (req, res, next) => {
 
   const insertSqlValues = [sku, name, qty, supplierId, categoryId, cost, shippingCost, size, location, color, status, imageUrl];
 
-  for (let i = 0; i < insertSqlValues.length; i++) {
-    if (!insertSqlValues[i]) {
-      return res.status(400).json({ error: 'Please fill out the entire form' });
+  const requiredFields = ['sku', 'name', 'qty', 'supplierId', 'categoryId', 'cost', 'shippingCost', 'size', 'location', 'color', 'status', 'imageUrl'];
+  const errors = [];
+
+  for (let i = 0; i < requiredFields.length; i++) {
+    if (!req.body[requiredFields[i]]) {
+      errors.push(requiredFields[i] + ' is a required field');
     }
+  }
+
+  if (errors.length > 0) {
+    return res.status(400).json({ errors: errors });
   }
 
   db.query(insertSql, insertSqlValues)
@@ -61,7 +67,7 @@ app.post('/api/products', (req, res, next) => {
       res.status(201).json(result.rows[0]);
     })
     .catch(err => console.error(err));
-  });
+});
 
 app.get('/api/products/:productId', (req, res, next) => {
   const productId = parseInt(req.params.productId, 10);
@@ -90,7 +96,6 @@ app.get('/api/products/:productId', (req, res, next) => {
       }
     })
     .catch(err => next(err));
-
 
 });
 

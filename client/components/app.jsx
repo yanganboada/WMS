@@ -1,19 +1,19 @@
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
+import AddProduct from './add-product';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'productList',
+        name: 'homePage',
         params: {}
       },
       product: []
     };
     this.setView = this.setView.bind(this);
-    this.getProductList = this.getProductList.bind(this);
   }
 
   setView(name, params) {
@@ -25,22 +25,8 @@ export default class App extends React.Component {
     });
   }
 
-  componentDidMount() {
-    this.getProductList();
-  }
-
-  getProductList() {
-    fetch('/api/products')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ product: data });
-      }
-      )
-      .catch(err => console.error(err));
-  }
-
   render() {
-    if (this.state.view.name === 'homepage') {
+    if (this.state.view.name === 'homePage') {
       return (
         <div>
           <Header setView={this.setView}/>
@@ -53,6 +39,15 @@ export default class App extends React.Component {
         <div>
           <Header/>
           <ProductList setView={this.setView} product={this.state.product} />
+        </div>
+      );
+    }
+
+    if (this.state.view.name === 'addProduct') {
+      return (
+        <div>
+          <Header />
+          <AddProduct setView={this.setView} product={this.state.product}/>
         </div>
       );
     }
