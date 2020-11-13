@@ -5,7 +5,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <div>
-        <nav className="navbar fixed-top">
+        <nav className="navbar sticky-top">
           <div className="navbar-brand">
             <i className="fas fa-bars"></i>
           </div>

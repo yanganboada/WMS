@@ -21,6 +21,7 @@ export default class ProductList extends React.Component {
         this.setState({ product: data });
       })
       .catch(err => console.error(err));
+  }
 
   render() {
 
@@ -48,7 +49,6 @@ export default class ProductList extends React.Component {
         </div>
 
         <Table product={this.state.product} setView={this.props.setView}/>
-
 
       </div>
 

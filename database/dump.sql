@@ -203,7 +203,6 @@ COPY public.category ("categoryId", "categoryName") FROM stdin;
 
 COPY public.products ("productId", sku, name, qty, "supplierId", "categoryId", cost, "shippingCost", size, location, color, status, "imageUrl") FROM stdin;
 1	NL01G	4 Side Bar Gold	345	1	1	7.5	0.149999999999999994	45x5mm 45+5mm	CDC5X3	gold	t	/images/NL01G.jpg
-2	NL01R	4 Side Bar Rose Gold	234	1	1	8	0.149999999999999994	45x5mm 45+5mm	CFD2Q5	rose gold	t	/images/NL01R.jpg
 3	NL02G	Bar Necklace Gold	2	1	1	6.90000000000000036	0.149999999999999994	40x7mm 40+5mm	XMD3G8	gold	t	/images/NL02G.jpg
 4	NL02R	Bar Rose Gold	4	1	1	7.70000000000000018	0.140000000000000013	40x7mm 40+5mm	MSC5D2	gold	t	/images/NL02R.jpg
 5	NL02S	Bar Silver	1	1	1	4.20000000000000018	0.149999999999999994	40x7mm 40+5mm	SKO4C9	gold	t	/images/NL02S.jpg
@@ -213,11 +212,8 @@ COPY public.products ("productId", sku, name, qty, "supplierId", "categoryId", c
 9	PT01B	Black Bone Tag	6	3	3	2.54999999999999982	0.849999999999999978	40*22mm	KWG5C3	black	t	/images/PT01B.jpg
 10	NL05W	Pearl Necklace	4	4	1	14	0.149999999999999994	8mm Dia 40+5mm	VAS3J9	white	t	/images/NL05W.jpeg
 11	NL05P	Pearl Necklace	3	4	1	14	0.149999999999999994	8mm Dia 40+5mm	OWV3D9	pink	f	/images/NL05P.jpg
-49	1	a	1	1	1	1	1	4mm	fdwa	b	t	/images/P001.jpg
-50	1	a	1	1	1	1	1	4mm	few	b	t	/images/P001.jpg
 51	1	a	1	1	1	1	1	4m	dewa	b	t	/images/P001.jpg
-52	1	a	1	1	1	1	1	4mm	21d	b	t	/images/P001.jpg
-53	321321	fehauwifjewa	3213	2	2	1	1	4mm	e32i	b	t	/images/P001.jpg
+2	NL01R	4 Side Bar Rose Gold	234	1	1	8	0.149999999999999994	45x5mm 45+5mm	CFD2Q5	rose gold	t	/images/NL01R.jpg
 \.
 
 
