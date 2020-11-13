@@ -165,7 +165,6 @@ app.put('/api/products/:productId', (req, res, next) => {
       }
     })
     .catch(err => next(err));
-
 });
 
 app.get('/api/products-quantity', (req, res, next) => {

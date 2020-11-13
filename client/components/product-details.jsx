@@ -25,8 +25,8 @@ export default class ProductDtails extends React.Component {
     this.props.setView('productList', null);
   }
 
-  handleEditClick(e) {
-    console.log(e);
+  handleEditClick() {
+    this.props.setView('addEditProduct', this.props.params);
   }
 
   toggleStatusClick(e) {
@@ -46,9 +46,9 @@ export default class ProductDtails extends React.Component {
     return this.state.product
 
       ? <div className='container'>
-        <div className='row card my-4 mx-2 p-2'>
+        <div className='row card p-2'>
           <div className="back-arrow w-100 p-2 cursor text-muted font-italic d-flex justify-content-end" onClick={this.handleBackClick} >
-            back to product list ->
+            back to product list -&gt;
           </div>
           <div className="row justify-content-center m-2">
             <img className="col-6 card-img-left border" src={this.state.product.imageUrl} alt={this.state.product.name} />
@@ -64,20 +64,21 @@ export default class ProductDtails extends React.Component {
             </div>
           </div>
           <div className="col-12 text-center my-2">
-            <div className="row justify-content-start m-2 p-2">Name: {this.state.product.name}</div>
-            <div className="row justify-content-start m-2 p-2">Category: {this.state.product.categoryName}</div>
-            <div className="row justify-content-start m-2 p-2">Cost: {`$${this.state.product.cost}`}</div>
-            <div className="row justify-content-start m-2 p-2">Shipping Cost: {`$${this.state.product.shippingCost}`}</div>
-            <div className="row justify-content-start m-2 p-2">Size: {this.state.product.size}</div>
-            <div className="row justify-content-start m-2 p-2">Location: {this.state.product.location}</div>
+            <div className="row justify-content-start m-1 p-1">Name: {this.state.product.name}</div>
+            <div className="row justify-content-start m-1 p-1">Category: {this.state.product.categoryName}</div>
+            <div className="row justify-content-start m-1 p-1">Category: {this.state.product.supplierName}</div>
+            <div className="row justify-content-start m-1 p-1">Cost: {`$${this.state.product.cost}`}</div>
+            <div className="row justify-content-start m-1 p-1">Shipping Cost: {`$${this.state.product.shippingCost}`}</div>
+            <div className="row justify-content-start m-1 p-1">Size: {this.state.product.size}</div>
+            <div className="row justify-content-start m-1 p-1">Location: {this.state.product.location}</div>
           </div>
           {
             this.state.product.status
-              ? <div className="row justify-content-between m-2 p-4">
+              ? <div className="row justify-content-between m-1 p-2">
                 <button className="btn-blue" onClick={this.handleEditClick}>Edit</button>
                 <button className="btn-red" onClick={this.toggleStatusClick}>Discontinue</button>
               </div>
-              : <div className="row justify-content-between m-2 p-4">
+              : <div className="row justify-content-between m-1 p-2">
                 <button className="btn-grey" disabled>Edit</button>
                 <button className="btn-green" onClick={this.toggleStatusClick}>Active</button>
               </div>
