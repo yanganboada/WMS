@@ -5,6 +5,7 @@ import ProductList from './product-list';
 import AddEditProduct from './add-edit-product';
 import ProductDetails from './product-details';
 import Reports from './reports';
+import LowInvReport from './low-inv-report';
 
 
 export default class App extends React.Component {
@@ -73,5 +74,15 @@ export default class App extends React.Component {
         </div>
       );
     }
+
+    if (this.state.view.name === 'lowInvReport') {
+      return (
+        <div>
+          <Header/>
+          <LowInvReport setView={this.setView} product={this.state.product}/>
+        </div>
+      );
+    }
+
   }
 }

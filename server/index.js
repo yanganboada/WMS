@@ -178,12 +178,12 @@ app.get('/api/products-quantity', (req, res, next) => {
       where "qty" <= $1
   `;
 
-  const values = [req.body.qty];
+  const values = [req.query.qty];
 
   db.query(sql, values)
     .then(result => {
       if (result.rowCount === 0) {
-        next(new ClientError('there is no amount with that qty in the database', 404));
+        next(new ClientError(`there is no amount with ${req.query.qty} in the database`, 404));
       } else {
         res.status(200).json(result.rows);
       }
