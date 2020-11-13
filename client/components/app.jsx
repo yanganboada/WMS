@@ -4,6 +4,7 @@ import HomePage from './home-page';
 import ProductList from './product-list';
 import AddProduct from './add-product';
 import ProductDetails from './product-details';
+import Reports from './reports';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -58,7 +59,16 @@ export default class App extends React.Component {
       return (
         <div>
           <Header />
-          <ProductDetails params={this.state.view.params} setView={this.setView} addToCart={this.addToCart} />
+          <ProductDetails params={this.state.view.params} setView={this.setView} />
+        </div>
+      );
+    }
+
+    if (this.state.view.name === 'reports') {
+      return (
+        <div>
+          <Header />
+          <Reports setView={this.setView}/>
         </div>
       );
     }
