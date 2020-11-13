@@ -4,8 +4,6 @@ import HomePage from './home-page';
 import ProductList from './product-list';
 import AddEditProduct from './add-edit-product';
 import ProductDetails from './product-details';
-import AddProduct from './add-product';
-import ProductDetails from './product-details';
 import Reports from './reports';
 
 
@@ -14,7 +12,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'addEditProduct',
+        name: 'homePage',
         params: {}
       },
       product: []
@@ -43,17 +41,16 @@ export default class App extends React.Component {
     if (this.state.view.name === 'productList') {
       return (
         <div>
-          <Header />
+          <Header setView={this.setView}/>
           <ProductList setView={this.setView} product={this.state.product} />
         </div>
       );
     }
 
-
     if (this.state.view.name === 'addEditProduct') {
       return (
         <div>
-          <Header />
+          <Header setView={this.setView}/>
           <AddEditProduct params={this.state.view.params} setView={this.setView}/>
         </div>
       );
@@ -62,7 +59,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'productDetails') {
       return (
         <div>
-          <Header />
+          <Header setView={this.setView}/>
           <ProductDetails params={this.state.view.params} setView={this.setView} />
         </div>
       );
@@ -71,7 +68,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'reports') {
       return (
         <div>
-          <Header />
+          <Header setView={this.setView}/>
           <Reports setView={this.setView}/>
         </div>
       );

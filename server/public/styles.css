@@ -179,7 +179,7 @@ button:hover {
   border: 1px solid #B6B6B6;
   box-sizing: border-box;
   border-radius: 33px;
-    font-style: normal;
+  font-style: normal;
   font-weight: bold;
   font-size: 24px;
   color: #457B9D
@@ -187,6 +187,10 @@ button:hover {
 
 .icon-blue{
   color: #1D3557;
+}
+
+.icon-white{
+  color: #ffffff;
 }
 
 .form-drop-down {
@@ -204,4 +208,18 @@ button:hover {
 
 .tbody-container {
   font-size: 12px;
+}
+
+.menu {
+  top: 0;
+  left: 0;
+  background-color: #457B9D;
+  border-radius: 0px 25px 25px 0px;
+  animation: menushow 0.4s ease-in-out;
+  box-shadow: #1D3557 2px 1px 4px 1px;
+}
+
+@keyframes menushow {
+  from { left: -20%; }
+  to { left: 0; }
 }
