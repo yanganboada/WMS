@@ -213,6 +213,11 @@ COPY public.products ("productId", sku, name, qty, "supplierId", "categoryId", c
 9	PT01B	Black Bone Tag	6	3	3	2.54999999999999982	0.849999999999999978	40*22mm	KWG5C3	black	t	/images/PT01B.jpg
 10	NL05W	Pearl Necklace	4	4	1	14	0.149999999999999994	8mm Dia 40+5mm	VAS3J9	white	t	/images/NL05W.jpeg
 11	NL05P	Pearl Necklace	3	4	1	14	0.149999999999999994	8mm Dia 40+5mm	OWV3D9	pink	f	/images/NL05P.jpg
+49	1	a	1	1	1	1	1	4mm	fdwa	b	t	/images/P001.jpg
+50	1	a	1	1	1	1	1	4mm	few	b	t	/images/P001.jpg
+51	1	a	1	1	1	1	1	4m	dewa	b	t	/images/P001.jpg
+52	1	a	1	1	1	1	1	4mm	21d	b	t	/images/P001.jpg
+53	321321	fehauwifjewa	3213	2	2	1	1	4mm	e32i	b	t	/images/P001.jpg
 \.
 
 
@@ -239,7 +244,7 @@ SELECT pg_catalog.setval('public."category_categoryId_seq"', 1, false);
 -- Name: products_productId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."products_productId_seq"', 1, false);
+SELECT pg_catalog.setval('public."products_productId_seq"', 53, true);
 
 
 --

@@ -2,18 +2,33 @@ import React from 'react';
 import Table from './table';
 
 export default class ProductList extends React.Component {
-  constructor(props){
-    super(props)
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: []
+    };
   }
+
+  componentDidMount() {
+    this.getProductList();
+  }
+
+  getProductList() {
+    fetch('/api/products')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ product: data });
+      })
+      .catch(err => console.error(err));
 
   render() {
 
     return (
 
       <div>
-
         <div className="d-flex justify-content-center">
-          <button className="add-product btn-blue m-3">Add Product</button>
+          <button className="add-product btn-blue m-3" onClick={() => this.props.setView('addProduct', {})}>Add Product</button>
         </div>
 
         <div className="row justify-content-center m-auto col-md-3">
@@ -32,7 +47,8 @@ export default class ProductList extends React.Component {
           </div>
         </div>
 
-        <Table product={this.props.product} setView={this.props.setView}/>
+        <Table product={this.state.product} setView={this.props.setView}/>
+
 
       </div>
 
