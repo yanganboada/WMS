@@ -21,6 +21,7 @@ export default class ProductList extends React.Component {
         this.setState({ product: data });
       })
       .catch(err => console.error(err));
+  }
 
   render() {
 
@@ -28,7 +29,10 @@ export default class ProductList extends React.Component {
 
       <div>
         <div className="d-flex justify-content-center">
-          <button className="add-product btn-blue m-3" onClick={() => this.props.setView('addProduct', {})}>Add Product</button>
+          <button className="add-product btn-blue m-3"
+            onClick={() => this.props.setView('addEditProduct', {})}>
+                  Add Product
+          </button>
         </div>
 
         <div className="row justify-content-center m-auto col-md-3">
@@ -48,7 +52,6 @@ export default class ProductList extends React.Component {
         </div>
 
         <Table product={this.state.product} setView={this.props.setView}/>
-
 
       </div>
 

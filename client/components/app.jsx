@@ -1,18 +1,15 @@
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
-
-import AddProduct from './add-product';
-
+import AddEditProduct from './add-edit-product';
 import ProductDetails from './product-details';
-
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'homePage',
+        name: 'addEditProduct',
         params: {}
       },
       product: []
@@ -47,21 +44,22 @@ export default class App extends React.Component {
       );
     }
 
-
-    if (this.state.view.name === 'addProduct') {
+    if (this.state.view.name === 'addEditProduct') {
       return (
         <div>
           <Header />
-          <AddProduct setView={this.setView} product={this.state.product}/>
+          <AddEditProduct params={this.state.view.params} setView={this.setView}/>
+        </div>
+      );
+    }
 
     if (this.state.view.name === 'productDetails') {
       return (
         <div>
           <Header />
-          <ProductDetails params={this.state.view.params} setView={this.setView} addToCart={this.addToCart} />
+          <ProductDetails params={this.state.view.params} setView={this.setView} />
         </div>
       );
     }
-
   }
 }

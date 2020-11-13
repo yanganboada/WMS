@@ -135,8 +135,7 @@ app.put('/api/products/:productId', (req, res, next) => {
     });
   }
 
-  const { sku, name, qty, supplierId, categoryId, cost, shippingCost, size, location, color, status, imageUrl } = req.body;
-
+  const { sku, name, qty, supplierId, categoryId, cost, shippingCost, size, location, color, imageUrl } = req.body;
 
   const sql = `
     update "products"
@@ -166,7 +165,6 @@ app.put('/api/products/:productId', (req, res, next) => {
       }
     })
     .catch(err => next(err));
-
 });
 
 app.use('/api', (req, res, next) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class AddProduct extends React.Component {
+export default class AddEditProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,17 +18,34 @@ export default class AddProduct extends React.Component {
         location: '',
         imageUrl: '/images/P001.jpg',
         status: true
-      }
+      },
+      edit: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (typeof this.props.params.productId !== 'undefined') {
+      this.setState({ edit: true });
+      fetch(`/api/products/${this.props.params.productId}`)
+        .then(res => res.json())
+        .then(res => {
+          this.setState({ fields: Object.assign({}, res) });
+        })
+        .catch(err => console.error(err));
+    } else {
+      this.setState({ edit: false });
+    }
   }
 
   handleChange(e) {
 
     const newState = {};
     newState[e.target.id] = e.target.value;
-    this.setState({ fields: Object.assign({}, this.state.fields, newState) });
+    this.setState({
+      fields: Object.assign({}, this.state.fields, newState)
+    });
 
     !Object.values(this.state.fields).includes('')
       ? this.setState({ error: false })
@@ -39,17 +56,34 @@ export default class AddProduct extends React.Component {
     e.preventDefault();
 
     const product = Object.assign({}, this.state.fields);
-    fetch('/api/products', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(product)
-    }).then(res => res.json())
-      .then(result => {
-        this.props.setView('productList', {});
+
+    if (this.state.edit) {
+      fetch(`/api/products/${this.props.params.productId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
       })
-      .catch(err => console.error(err));
+        .then(res => { res; })
+        // .then(result => result.json())
+        .then(result => {
+          this.props.setView('productDetails', this.props.params);
+        })
+        .catch(err => console.error(err));
+    } else {
+      fetch('/api/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+      }).then(res => res.json())
+        .then(result => {
+          this.props.setView('productList', {});
+        })
+        .catch(err => console.error(err));
+    }
   }
 
   render() {
@@ -61,7 +95,9 @@ export default class AddProduct extends React.Component {
             <p>Back to Product List -&gt;</p>
           </div>
           <div className="row justify-content-center m-2">
-            <img className="col-6 card-img-left border" src={this.state.fields.imageUrl} onChange={this.handleChange} />
+            <img className="col-6 card-img-left border"
+              src={this.state.fields.imageUrl}
+              onChange={this.handleChange} />
             <div className="col-6">
               <div className="row m-2">
                 Sku:
@@ -70,7 +106,7 @@ export default class AddProduct extends React.Component {
                     type="text"
                     className="form-control product-form form-control-sm"
                     placeholder="Sku"
-                    size="5"
+                    size="8"
                     id='sku'
                     value={this.state.fields.sku}
                     onChange={this.handleChange} required>
@@ -84,7 +120,7 @@ export default class AddProduct extends React.Component {
                     type="text"
                     className="form-control product-form form-control-sm"
                     placeholder="Color"
-                    size="5"
+                    size="8"
                     id='color'
                     value={this.state.fields.color}
                     onChange={this.handleChange} required>
@@ -98,7 +134,7 @@ export default class AddProduct extends React.Component {
                     type="text"
                     className="form-control product-form form-control-sm"
                     placeholder="Qty"
-                    size="5"
+                    size="8"
                     id='qty'
                     value={this.state.fields.qty}
                     onChange={this.handleChange} required>
@@ -206,17 +242,20 @@ export default class AddProduct extends React.Component {
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-center">
-            {this.state.error
-              ? <p className="d-flex justify-content-center">Please fill out the entire form</p>
-              : <p className="d-none"></p>}
-          </div>
-          <div className="d-flex justify-content-center">
-
-            {this.state.error
-              ? <button className="add-product btn-grey m-3" disabled>Submit</button>
-              : <button className="add-product btn-blue m-3" onClick={this.handleSubmit}>Submit</button>}
-          </div>
+          { this.state.error
+            ? <div className="row">
+              <p className="w-100 text-center text-danger">
+                { this.state.edit
+                  ? 'At least one filed need to be changed'
+                  : 'Please fill out the entire form' }
+              </p>
+              <button className="btn-grey mx-auto mb-4" disabled>Submit</button>
+            </div>
+            : <div className="w-100 text-center text-danger">
+              <p className="d-none"></p>
+              <button className="btn-blue mx-auto mb-4" onClick={this.handleSubmit}>Submit</button>
+            </div>
+          }
 
         </div>
       </div>
