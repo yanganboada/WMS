@@ -7,13 +7,12 @@ import ProductDetails from './product-details';
 import Reports from './reports';
 import LowInvReport from './low-inv-report';
 
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'homePage',
+        name: 'productList',
         params: {}
       },
       product: []
