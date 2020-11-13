@@ -2,6 +2,7 @@ import React from 'react';
 import Table from './table';
 
 export default class ProductList extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +21,6 @@ export default class ProductList extends React.Component {
         this.setState({ product: data });
       })
       .catch(err => console.error(err));
-  }
 
   render() {
 
@@ -47,7 +47,8 @@ export default class ProductList extends React.Component {
           </div>
         </div>
 
-        <Table product={this.state.product} />
+        <Table product={this.state.product} setView={this.props.setView}/>
+
 
       </div>
 
