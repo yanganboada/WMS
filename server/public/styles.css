@@ -140,6 +140,51 @@ button:hover {
   border-radius: 32px;
 }
 
+.btn-low-inv{
+  width: 311px;
+  height: 162.79px;
+  left: 32px;
+  top: 85px;
+  background: #C6DEF1;
+  border: 1px solid #B6B6B6;
+  box-sizing: border-box;
+  border-radius: 33px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: #457B9D
+}
+
+.btn-category {
+  width: 311px;
+  height: 162.79px;
+  left: 32px;
+  top: 273.49px;
+  background: #C9E4DE;
+  border: 1px solid #B6B6B6;
+  box-sizing: border-box;
+  border-radius: 33px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: #457B9D
+}
+
+.btn-coming-soon {
+  width: 311px;
+  height: 162.79px;
+  left: 32px;
+  top: 463.21px;
+  background: #F7D9C4;
+  border: 1px solid #B6B6B6;
+  box-sizing: border-box;
+  border-radius: 33px;
+    font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: #457B9D
+}
+
 .icon-blue{
   color: #1D3557;
 }
