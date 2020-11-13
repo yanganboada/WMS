@@ -167,6 +167,31 @@ app.put('/api/products/:productId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/products-quantity', (req, res, next) => {
+  const sql = `
+    select "sku",
+           "name",
+           "c"."categoryName" as "category",
+           "qty"
+      from "products"
+      join "category" as "c" using ("categoryId")
+      where "qty" <= $1
+  `;
+
+  const values = [req.body.qty];
+
+  db.query(sql, values)
+    .then(result => {
+      if (result.rowCount === 0) {
+        next(new ClientError('there is no amount with that qty in the database', 404));
+      } else {
+        res.status(200).json(result.rows);
+      }
+    })
+    .catch(err => console.error(err));
+
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });

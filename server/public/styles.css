@@ -1,10 +1,28 @@
 body {
   font-family: 'Karla', sans-serif;
-  padding-top: 60px;
 }
 
 h1, h2, h3, h4, h5, h6, p, div {
   color: #1d3557;
+}
+
+.banner {
+  height: 140px;
+  left: 0px;
+  top: 0px;
+  background-color: #457B9D;
+  background-size: cover;
+}
+
+.home-page-text{
+  width: 178px;
+  height: 68px;
+  left: 126px;
+  top: 24px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 72px;
+  line-height: 84px;
 }
 
 .grey-background{
@@ -55,6 +73,120 @@ button:hover {
 .btn-grey {
   border-radius: 12px;
   background-color: #9A99A2;
+}
+
+.btn-product {
+  width: 150px;
+  height: 130px;
+  left: 25px;
+  top: 174px;
+  background: #E2CFC4;
+  border: 1px solid #B6B6B6;
+  border-radius: 32px;
+}
+
+.btn-reports {
+  width: 150px;
+  height: 130px;
+  left: 200px;
+  top: 174px;
+  background: #C9E4DE;
+  border: 1px solid #B6B6B6;
+  box-sizing: border-box;
+  border-radius: 32px;
+}
+
+.btn-import-product {
+  width: 150px;
+  height: 130px;
+  left: 25px;
+  top: 333px;
+  background: #C6DEF1;
+  border: 1px solid #B6B6B6;
+  box-sizing: border-box;
+  border-radius: 32px;
+}
+
+.btn-export-product {
+  width: 150px;
+  height: 130px;
+  left: 200px;
+  top: 333px;
+  background: #F7D9C4;
+  border: 1px solid #B6B6B6;
+  box-sizing: border-box;
+  border-radius: 32px;
+}
+
+.btn-gen-pick-list {
+  width: 150px;
+  height: 130px;
+  left: 25px;
+  top: 493px;
+  background: #FAEDCB;
+  border: 1px solid #B6B6B6;
+  box-sizing: border-box;
+  border-radius: 32px;
+}
+
+.btn-po-suggestion {
+  width: 150px;
+  height: 130px;
+  left: 200px;
+  top: 493px;
+  background: #DBCDF0;
+  border: 1px solid #B6B6B6;
+  box-sizing: border-box;
+  border-radius: 32px;
+}
+
+.btn-low-inv{
+  width: 311px;
+  height: 162.79px;
+  left: 32px;
+  top: 85px;
+  background: #C6DEF1;
+  border: 1px solid #B6B6B6;
+  box-sizing: border-box;
+  border-radius: 33px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: #457B9D
+}
+
+.btn-category {
+  width: 311px;
+  height: 162.79px;
+  left: 32px;
+  top: 273.49px;
+  background: #C9E4DE;
+  border: 1px solid #B6B6B6;
+  box-sizing: border-box;
+  border-radius: 33px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: #457B9D
+}
+
+.btn-coming-soon {
+  width: 311px;
+  height: 162.79px;
+  left: 32px;
+  top: 463.21px;
+  background: #F7D9C4;
+  border: 1px solid #B6B6B6;
+  box-sizing: border-box;
+  border-radius: 33px;
+    font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: #457B9D
+}
+
+.icon-blue{
+  color: #1D3557;
 }
 
 .form-drop-down {

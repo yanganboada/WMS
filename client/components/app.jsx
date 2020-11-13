@@ -1,8 +1,13 @@
 import React from 'react';
 import Header from './header';
+import HomePage from './home-page';
 import ProductList from './product-list';
 import AddEditProduct from './add-edit-product';
 import ProductDetails from './product-details';
+import AddProduct from './add-product';
+import ProductDetails from './product-details';
+import Reports from './reports';
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,7 +35,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'homePage') {
       return (
         <div>
-          <Header setView={this.setView}/>
+          <HomePage setView={this.setView}/>
         </div>
       );
     }
@@ -38,11 +43,12 @@ export default class App extends React.Component {
     if (this.state.view.name === 'productList') {
       return (
         <div>
-          <Header/>
+          <Header />
           <ProductList setView={this.setView} product={this.state.product} />
         </div>
       );
     }
+
 
     if (this.state.view.name === 'addEditProduct') {
       return (
@@ -58,6 +64,15 @@ export default class App extends React.Component {
         <div>
           <Header />
           <ProductDetails params={this.state.view.params} setView={this.setView} />
+        </div>
+      );
+    }
+
+    if (this.state.view.name === 'reports') {
+      return (
+        <div>
+          <Header />
+          <Reports setView={this.setView}/>
         </div>
       );
     }
