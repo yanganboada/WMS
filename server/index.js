@@ -192,6 +192,49 @@ app.get('/api/products-quantity', (req, res, next) => {
 
 });
 
+app.get('/api/products-filter', (req, res, next) => {
+
+  const sql = `
+    select "sku",
+           "name",
+           "c"."categoryName" as "category",
+           "qty"
+      from "products"
+      join "category" as "c" using ("categoryId")
+  `;
+
+  let whereSql = '';
+  const values = [];
+
+  if (req.query.sku) {
+    whereSql = 'where sku ILIKE $1';
+    values.push(`%${req.query.sku}%`);
+
+  } else if (req.query.name) {
+    whereSql = 'where name ILIKE $1';
+    values.push(`%${req.query.name}%`);
+
+  } else if (req.query.categoryName) {
+    whereSql = 'where categoryName=$1';
+    values.push(`%${req.query.categoryName}%`);
+
+  } else if (req.query.qty) {
+    whereSql = 'where qty=$1';
+    values.push(`%${req.query.qty}%`);
+  }
+
+  db.query(`${sql} ${whereSql}`, values)
+    .then(result => {
+      if (result.rowCount === 0) {
+        next(new ClientError('There is no data with that value', 404));
+      } else {
+        res.status(200).json(result.rows);
+      }
+    })
+    .catch(err => console.error(err));
+
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
