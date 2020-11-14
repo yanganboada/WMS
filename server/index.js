@@ -8,17 +8,17 @@ const sessionMiddleware = require('./session-middleware');
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    file.fieldname === "imageUpload"
+    file.fieldname === 'imageUpload'
       ? cb(null, __dirname + '/public/images/')
-      : cb(null, __dirname + '/public/uploads/')
+      : cb(null, __dirname + '/public/uploads/');
   },
   filename: (req, file, cb) => {
-    file.fieldname === "imageUpload"
+    file.fieldname === 'imageUpload'
       ? cb(null, file.originalname)
-      : cb(null, file.originalname + '-' + Date.now())
+      : cb(null, file.originalname + '-' + Date.now());
   }
 });
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage });
 
 // res.download
 

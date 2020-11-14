@@ -6,7 +6,6 @@ import AddEditProduct from './add-edit-product';
 import ProductDetails from './product-details';
 import Reports from './reports';
 
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -46,7 +45,6 @@ export default class App extends React.Component {
         </div>
       );
     }
-
 
     if (this.state.view.name === 'addEditProduct') {
       return (

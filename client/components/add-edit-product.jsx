@@ -38,9 +38,9 @@ export default class AddEditProduct extends React.Component {
     }
   }
 
-  hangdleImageChange(e){
+  hangdleImageChange(e) {
     this.setState({
-      fields: Object.assign(this.state.fields, { imageUrl: URL.createObjectURL(e.target.files[0])}),
+      fields: Object.assign(this.state.fields, { imageUrl: URL.createObjectURL(e.target.files[0]) }),
       imageFile: e.target.files[0]
     });
   }
@@ -75,7 +75,7 @@ export default class AddEditProduct extends React.Component {
           this.props.setView('productDetails', this.props.params);
         })
         .catch(err => console.error(err));
-    } else{
+    } else {
       const formData = new FormData();
       formData.append('imageUpload', this.state.imageFile);
       fetch('/api/images', {
@@ -122,7 +122,7 @@ export default class AddEditProduct extends React.Component {
               <div className='row m-2'>
                 <div className='col-6 flex-column'>
                   <img className="col-12 card-img-left border"
-                    src={this.state.fields.imageUrl===''
+                    src={this.state.fields.imageUrl === ''
                       ? './images/image-holder.png'
                       : this.state.fields.imageUrl
                     }
@@ -139,13 +139,13 @@ export default class AddEditProduct extends React.Component {
                       className="custom-file-label"
                       htmlFor="customFile">
                       Choose Image
-                  </label>
+                    </label>
                   </div>
                 </div>
                 <div className='col-6'>
                   <div className="row m-2">
                     Sku:
-                  <div className="ml-auto">
+                    <div className="ml-auto">
                       <input
                         type="text"
                         className="form-control product-form form-control-sm"
@@ -159,7 +159,7 @@ export default class AddEditProduct extends React.Component {
                   </div>
                   <div className="row m-2">
                     Color:
-                  <div className="ml-auto">
+                    <div className="ml-auto">
                       <input
                         type="text"
                         className="form-control product-form form-control-sm"
@@ -173,7 +173,7 @@ export default class AddEditProduct extends React.Component {
                   </div>
                   <div className="row m-2">
                     QTY:
-                  <div className="ml-auto">
+                    <div className="ml-auto">
                       <input
                         type="text"
                         className="form-control product-form form-control-sm"
@@ -188,122 +188,122 @@ export default class AddEditProduct extends React.Component {
                 </div>
               </div>
 
-          <div className="col-12 text-center my-2">
-            <div className="row align-items-center m-2">
+              <div className="col-12 text-center my-2">
+                <div className="row align-items-center m-2">
               Name:
-              <div className="ml-auto">
-                <input
-                  type="text"
-                  className="form-control product-form form-control-sm"
-                  placeholder="Name"
-                  size="25"
-                  id='name'
-                  value={this.state.fields.name}
-                  onChange={this.handleChange} required>
-                </input>
-              </div>
-            </div>
-            <div className="row align-items-center m-2">
+                  <div className="ml-auto">
+                    <input
+                      type="text"
+                      className="form-control product-form form-control-sm"
+                      placeholder="Name"
+                      size="25"
+                      id='name'
+                      value={this.state.fields.name}
+                      onChange={this.handleChange} required>
+                    </input>
+                  </div>
+                </div>
+                <div className="row align-items-center m-2">
               Category:
-              <div className="ml-auto">
-                <select
-                  className="form-control-sm product-drop-down"
-                  id='categoryId'
-                  value={this.state.fields.categoryId}
-                  onChange={this.handleChange} required>
-                  <option>Select One...</option>
-                  <option value="1">Necklace</option>
-                  <option value="2">Packaging</option>
-                  <option value="3">Dog Tag</option>
-                </select>
-              </div>
-            </div>
-            <div className="row align-items-center m-2">
+                  <div className="ml-auto">
+                    <select
+                      className="form-control-sm product-drop-down"
+                      id='categoryId'
+                      value={this.state.fields.categoryId}
+                      onChange={this.handleChange} required>
+                      <option>Select One...</option>
+                      <option value="1">Necklace</option>
+                      <option value="2">Packaging</option>
+                      <option value="3">Dog Tag</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="row align-items-center m-2">
               Supplier:
-              <div className="ml-auto">
-                <select
-                  className="form-control-sm product-drop-down"
-                  id='supplierId'
-                  value={this.state.fields.supplierId}
-                  onChange={this.handleChange} required>
-                  <option>Select One...</option>
-                  <option value="1">Yiwu Basic Stainless</option>
-                  <option value="2">jpb box & Zhihua Packaging</option>
-                  <option value="3">Jienuo Stainless</option>
-                  <option value="4">Lazy Cat Alex</option>
-                </select>
-              </div>
-            </div>
-            <div className="row align-items-center m-2">
+                  <div className="ml-auto">
+                    <select
+                      className="form-control-sm product-drop-down"
+                      id='supplierId'
+                      value={this.state.fields.supplierId}
+                      onChange={this.handleChange} required>
+                      <option>Select One...</option>
+                      <option value="1">Yiwu Basic Stainless</option>
+                      <option value="2">jpb box & Zhihua Packaging</option>
+                      <option value="3">Jienuo Stainless</option>
+                      <option value="4">Lazy Cat Alex</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="row align-items-center m-2">
               Cost:
-              <div className="ml-auto">
-                <input
-                  type="text"
-                  className="form-control product-form form-control-sm"
-                  placeholder="0.00"
-                  size="25"
-                  id='cost'
-                  value={this.state.fields.cost}
-                  onChange={this.handleChange} required></input>
-              </div>
-            </div>
-            <div className="row align-items-center m-2">
+                  <div className="ml-auto">
+                    <input
+                      type="text"
+                      className="form-control product-form form-control-sm"
+                      placeholder="0.00"
+                      size="25"
+                      id='cost'
+                      value={this.state.fields.cost}
+                      onChange={this.handleChange} required></input>
+                  </div>
+                </div>
+                <div className="row align-items-center m-2">
               Shipping Cost:
-              <div className="ml-auto">
-                <input
-                  type="text"
-                  className="form-control product-form form-control-sm"
-                  placeholder="0.00"
-                  size="25"
-                  id='shippingCost'
-                  value={this.state.fields.shippingCost}
-                  onChange={this.handleChange} required></input>
-              </div>
-            </div>
-            <div className="row align-items-center m-2">
+                  <div className="ml-auto">
+                    <input
+                      type="text"
+                      className="form-control product-form form-control-sm"
+                      placeholder="0.00"
+                      size="25"
+                      id='shippingCost'
+                      value={this.state.fields.shippingCost}
+                      onChange={this.handleChange} required></input>
+                  </div>
+                </div>
+                <div className="row align-items-center m-2">
               Size:
-              <div className="ml-auto">
-                <input
-                  type="text"
-                  className="form-control product-form form-control-sm"
-                  placeholder="4mmx4mmx4mm"
-                  size="25"
-                  id='size'
-                  value={this.state.fields.size}
-                  onChange={this.handleChange} required></input>
-              </div>
-            </div>
-            <div className="row align-items-center m-2">
+                  <div className="ml-auto">
+                    <input
+                      type="text"
+                      className="form-control product-form form-control-sm"
+                      placeholder="4mmx4mmx4mm"
+                      size="25"
+                      id='size'
+                      value={this.state.fields.size}
+                      onChange={this.handleChange} required></input>
+                  </div>
+                </div>
+                <div className="row align-items-center m-2">
               Location:
-              <div className="ml-auto">
-                <input
-                  type="text"
-                  className="form-control product-form form-control-sm"
-                  placeholder="Location"
-                  size="25"
-                  id='location'
-                  value={this.state.fields.location}
-                  onChange={this.handleChange} required></input>
+                  <div className="ml-auto">
+                    <input
+                      type="text"
+                      className="form-control product-form form-control-sm"
+                      placeholder="Location"
+                      size="25"
+                      id='location'
+                      value={this.state.fields.location}
+                      onChange={this.handleChange} required></input>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          { this.state.error
-            ? <div className="w-100 text-center">
-                <p className="w-100 text-center text-danger">
-                  { this.state.edit
-                    ? 'At least one filed need to be changed'
-                    : 'Please fill out the entire form' }
-                </p>
-                <button className="btn-grey mx-auto mb-4" disabled>Submit</button>
-              </div>
-            : <div className="w-100 text-center">
-                <p></p>
-                <button type='submit' className="btn-blue mx-auto mb-4" >Submit</button>
-              </div>
-          }
+              { this.state.error
+                ? <div className="w-100 text-center">
+                  <p className="w-100 text-center text-danger">
+                    { this.state.edit
+                      ? 'At least one filed need to be changed'
+                      : 'Please fill out the entire form' }
+                  </p>
+                  <button className="btn-grey mx-auto mb-4" disabled>Submit</button>
+                </div>
+                : <div className="w-100 text-center">
+                  <p></p>
+                  <button type='submit' className="btn-blue mx-auto mb-4" >Submit</button>
+                </div>
+              }
             </form>
+          </div>
         </div>
-      </div>
       </div>
 
     );
