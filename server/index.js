@@ -202,12 +202,55 @@ app.get('/api/products-quantity', (req, res, next) => {
       where "qty" <= $1
   `;
 
-  const values = [req.body.qty];
+  const values = [req.query.qty];
 
   db.query(sql, values)
     .then(result => {
       if (result.rowCount === 0) {
-        next(new ClientError('there is no amount with that qty in the database', 404));
+        next(new ClientError(`there is no amount with ${req.query.qty} in the database`, 404));
+      } else {
+        res.status(200).json(result.rows);
+      }
+    })
+    .catch(err => console.error(err));
+
+});
+
+app.get('/api/products-filter', (req, res, next) => {
+
+  const sql = `
+    select "sku",
+           "name",
+           "c"."categoryName" as "category",
+           "qty"
+      from "products"
+      join "category" as "c" using ("categoryId")
+  `;
+
+  let whereSql = '';
+  const values = [];
+
+  if (req.query.sku) {
+    whereSql = 'where sku ILIKE $1';
+    values.push(`%${req.query.sku}%`);
+
+  } else if (req.query.name) {
+    whereSql = 'where name ILIKE $1';
+    values.push(`%${req.query.name}%`);
+
+  } else if (req.query.categoryName) {
+    whereSql = 'where categoryName=$1';
+    values.push(`%${req.query.categoryName}%`);
+
+  } else if (req.query.qty) {
+    whereSql = 'where qty=$1';
+    values.push(`%${req.query.qty}%`);
+  }
+
+  db.query(`${sql} ${whereSql}`, values)
+    .then(result => {
+      if (result.rowCount === 0) {
+        next(new ClientError('There is no data with that value', 404));
       } else {
         res.status(200).json(result.rows);
       }

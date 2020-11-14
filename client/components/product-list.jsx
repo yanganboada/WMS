@@ -8,6 +8,7 @@ export default class ProductList extends React.Component {
     this.state = {
       product: []
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +24,10 @@ export default class ProductList extends React.Component {
       .catch(err => console.error(err));
   }
 
+  handleChange() {
+
+  }
+
   render() {
 
     return (
@@ -31,7 +36,7 @@ export default class ProductList extends React.Component {
         <div className="d-flex justify-content-center">
           <button className="add-product btn-blue m-3"
             onClick={() => this.props.setView('addEditProduct', {})}>
-                  Add Product
+            Add Product
           </button>
         </div>
 
@@ -44,14 +49,22 @@ export default class ProductList extends React.Component {
                 </div>
               </span>
             </div>
+
             <select className="form-control form-drop-down mr-3">
-              <option>FILTER</option>
+              <option>Filter By...</option>
+              <option>SKU</option>
+              <option>Name</option>
+              <option>Category</option>
+              <option>QTY</option>
             </select>
-            <input type="text" className="form-control" placeholder="Example input"></input>
+
+            <form onSubmit={this.handleChange}>
+              <input type="text" className="form-control" placeholder="Example input"></input>
+            </form>
           </div>
         </div>
 
-        <Table product={this.state.product} setView={this.props.setView}/>
+        <Table product={this.state.product} setView={this.props.setView} />
 
       </div>
 
