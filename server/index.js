@@ -1,10 +1,26 @@
 require('dotenv/config');
 const express = require('express');
-
 const db = require('./database');
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
 const sessionMiddleware = require('./session-middleware');
+
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    file.fieldname === "imageUpload"
+      ? cb(null, __dirname + '/public/images/')
+      : cb(null, __dirname + '/public/uploads/')
+  },
+  filename: (req, file, cb) => {
+    file.fieldname === "imageUpload"
+      ? cb(null, file.originalname)
+      : cb(null, file.originalname + '-' + Date.now())
+  }
+});
+const upload = multer({ storage: storage })
+
+// res.download
 
 const app = express();
 
@@ -99,6 +115,14 @@ app.get('/api/products/:productId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/images', upload.single('imageUpload'), (req, res, next) => {
+  const image = req.file;
+  if (!image) {
+    next(new ClientError('please upload a image', 404));
+  }
+  res.json(image);
+});
+
 app.patch('/api/products/:productId', (req, res, next) => {
   const productId = parseInt(req.params.productId, 10);
   if (!Number.isInteger(productId) || productId <= 0) {
@@ -161,7 +185,7 @@ app.put('/api/products/:productId', (req, res, next) => {
       if (result.rowCount === 0) {
         next(new ClientError(`"productId" ${productId} does not in the database`, 404));
       } else {
-        res.status(204).json(result.rows[0]);
+        res.status(200).json(result.rows[0]);
       }
     })
     .catch(err => next(err));

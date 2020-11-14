@@ -4,8 +4,6 @@ import HomePage from './home-page';
 import ProductList from './product-list';
 import AddEditProduct from './add-edit-product';
 import ProductDetails from './product-details';
-import AddProduct from './add-product';
-import ProductDetails from './product-details';
 import Reports from './reports';
 
 

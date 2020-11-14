@@ -16,13 +16,14 @@ export default class AddEditProduct extends React.Component {
         shippingCost: '',
         size: '',
         location: '',
-        imageUrl: '/images/P001.jpg',
+        imageUrl: '',
         status: true
       },
-      edit: false
+      imageFile: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.hangdleImageChange = this.hangdleImageChange.bind(this);
   }
 
   componentDidMount() {
@@ -34,17 +35,23 @@ export default class AddEditProduct extends React.Component {
           this.setState({ fields: Object.assign({}, res) });
         })
         .catch(err => console.error(err));
-    } else {
-      this.setState({ edit: false });
     }
+  }
+
+  hangdleImageChange(e){
+    this.setState({
+      fields: Object.assign(this.state.fields, { imageUrl: URL.createObjectURL(e.target.files[0])}),
+      imageFile: e.target.files[0]
+    });
   }
 
   handleChange(e) {
 
     const newState = {};
     newState[e.target.id] = e.target.value;
+
     this.setState({
-      fields: Object.assign({}, this.state.fields, newState)
+      fields: Object.assign(this.state.fields, newState)
     });
 
     !Object.values(this.state.fields).includes('')
@@ -56,8 +63,7 @@ export default class AddEditProduct extends React.Component {
     e.preventDefault();
 
     const product = Object.assign({}, this.state.fields);
-
-    if (this.state.edit) {
+    if (typeof this.props.params.productId !== 'undefined') {
       fetch(`/api/products/${this.props.params.productId}`, {
         method: 'PUT',
         headers: {
@@ -65,25 +71,42 @@ export default class AddEditProduct extends React.Component {
         },
         body: JSON.stringify(product)
       })
-        .then(res => { res; })
-        // .then(result => result.json())
         .then(result => {
           this.props.setView('productDetails', this.props.params);
         })
         .catch(err => console.error(err));
-    } else {
-      fetch('/api/products', {
+    } else{
+      const formData = new FormData();
+      formData.append('imageUpload', this.state.imageFile);
+      fetch('/api/images', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(product)
-      }).then(res => res.json())
-        .then(result => {
-          this.props.setView('productList', {});
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          this.setState({
+            fields: Object.assign(this.state.fields, { imageUrl: `/images/${data.originalname}` })
+          });
         })
-        .catch(err => console.error(err));
+        .then(() => {
+          fetch('/api/products', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(product)
+          })
+            .then(res => res.json())
+            .then(result => {
+              this.props.setView('productList', {});
+            })
+            .catch(err => console.error(err));
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
+
   }
 
   render() {
@@ -95,54 +118,76 @@ export default class AddEditProduct extends React.Component {
             <p>Back to Product List -&gt;</p>
           </div>
           <div className="row justify-content-center m-2">
-            <img className="col-6 card-img-left border"
-              src={this.state.fields.imageUrl}
-              onChange={this.handleChange} />
-            <div className="col-6">
-              <div className="row m-2">
-                Sku:
-                <div className="ml-auto">
-                  <input
-                    type="text"
-                    className="form-control product-form form-control-sm"
-                    placeholder="Sku"
-                    size="8"
-                    id='sku'
-                    value={this.state.fields.sku}
-                    onChange={this.handleChange} required>
-                  </input>
+            <form encType="multipart/form-data" className="row justify-content-between" onSubmit={this.handleSubmit}>
+              <div className='row m-2'>
+                <div className='col-6 flex-column'>
+                  <img className="col-12 card-img-left border"
+                    src={this.state.fields.imageUrl===''
+                      ? './images/image-holder.png'
+                      : this.state.fields.imageUrl
+                    }
+                    onChange={this.hangdleImageChange} />
+                  <div className="custom-file">
+                    <input
+                      type="file"
+                      className="custom-file-input"
+                      id="imageUrl"
+                      name="imageUpload"
+                      accept="image/*"
+                      onChange={this.hangdleImageChange} />
+                    <label
+                      className="custom-file-label"
+                      htmlFor="customFile">
+                      Choose Image
+                  </label>
+                  </div>
+                </div>
+                <div className='col-6'>
+                  <div className="row m-2">
+                    Sku:
+                  <div className="ml-auto">
+                      <input
+                        type="text"
+                        className="form-control product-form form-control-sm"
+                        placeholder="Sku"
+                        size="8"
+                        id='sku'
+                        value={this.state.fields.sku}
+                        onChange={this.handleChange} required>
+                      </input>
+                    </div>
+                  </div>
+                  <div className="row m-2">
+                    Color:
+                  <div className="ml-auto">
+                      <input
+                        type="text"
+                        className="form-control product-form form-control-sm"
+                        placeholder="Color"
+                        size="8"
+                        id='color'
+                        value={this.state.fields.color}
+                        onChange={this.handleChange} required>
+                      </input>
+                    </div>
+                  </div>
+                  <div className="row m-2">
+                    QTY:
+                  <div className="ml-auto">
+                      <input
+                        type="text"
+                        className="form-control product-form form-control-sm"
+                        placeholder="Qty"
+                        size="8"
+                        id='qty'
+                        value={this.state.fields.qty}
+                        onChange={this.handleChange} required>
+                      </input>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="row m-2">
-                Color:
-                <div className="ml-auto">
-                  <input
-                    type="text"
-                    className="form-control product-form form-control-sm"
-                    placeholder="Color"
-                    size="8"
-                    id='color'
-                    value={this.state.fields.color}
-                    onChange={this.handleChange} required>
-                  </input>
-                </div>
-              </div>
-              <div className="row m-2">
-                QTY:
-                <div className="ml-auto">
-                  <input
-                    type="text"
-                    className="form-control product-form form-control-sm"
-                    placeholder="Qty"
-                    size="8"
-                    id='qty'
-                    value={this.state.fields.qty}
-                    onChange={this.handleChange} required>
-                  </input>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div className="col-12 text-center my-2">
             <div className="row align-items-center m-2">
               Name:
@@ -243,21 +288,22 @@ export default class AddEditProduct extends React.Component {
             </div>
           </div>
           { this.state.error
-            ? <div className="row">
-              <p className="w-100 text-center text-danger">
-                { this.state.edit
-                  ? 'At least one filed need to be changed'
-                  : 'Please fill out the entire form' }
-              </p>
-              <button className="btn-grey mx-auto mb-4" disabled>Submit</button>
-            </div>
-            : <div className="w-100 text-center text-danger">
-              <p className="d-none"></p>
-              <button className="btn-blue mx-auto mb-4" onClick={this.handleSubmit}>Submit</button>
-            </div>
+            ? <div className="w-100 text-center">
+                <p className="w-100 text-center text-danger">
+                  { this.state.edit
+                    ? 'At least one filed need to be changed'
+                    : 'Please fill out the entire form' }
+                </p>
+                <button className="btn-grey mx-auto mb-4" disabled>Submit</button>
+              </div>
+            : <div className="w-100 text-center">
+                <p></p>
+                <button type='submit' className="btn-blue mx-auto mb-4" >Submit</button>
+              </div>
           }
-
+            </form>
         </div>
+      </div>
       </div>
 
     );
