@@ -1,0 +1,4 @@
+sku,name,qty,supplierId,categoryId,cost,shippingCost,size,location,color,status,imageUrl
+PT04B,large dog tag black,345,2,3,2.85,0.15,50*29mm,CLC5X3,black,TRUE,/upload/images/PT04GE28.jpg
+PT04G,large dog tag gold,234,2,3,2.35,0.15,50*29mm,CLC5X4,gold,TRUE,/upload/images/PT04I.jpg
+PT04I,large dog tag rainbow,2,3,1,2.85,0.15,50*29mm,CLC5X5,rainbow,TRUE,/upload/images/PT04S.jpg

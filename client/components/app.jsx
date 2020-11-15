@@ -3,6 +3,7 @@ import Header from './header';
 import HomePage from './home-page';
 import ProductList from './product-list';
 import AddEditProduct from './add-edit-product';
+import ImportProducts from './import-products';
 import ProductDetails from './product-details';
 import Reports from './reports';
 import LowInvReport from './low-inv-report';
@@ -12,7 +13,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'productList',
+        name: 'importProducts',
         params: {}
       },
       product: []
@@ -41,7 +42,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'productList') {
       return (
         <div>
-          <Header setView={this.setView}/>
+          <Header view={this.state.view.name} setView={this.setView}/>
           <ProductList setView={this.setView} product={this.state.product} />
         </div>
       );
@@ -50,8 +51,17 @@ export default class App extends React.Component {
     if (this.state.view.name === 'addEditProduct') {
       return (
         <div>
-          <Header setView={this.setView}/>
+          <Header view={this.state.view.name} setView={this.setView}/>
           <AddEditProduct params={this.state.view.params} setView={this.setView}/>
+        </div>
+      );
+    }
+
+    if (this.state.view.name === 'importProducts') {
+      return (
+        <div>
+          <Header view={this.state.view.name} setView={this.setView} />
+          <ImportProducts setView={this.setView} />
         </div>
       );
     }
@@ -59,7 +69,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'productDetails') {
       return (
         <div>
-          <Header setView={this.setView}/>
+          <Header view={this.state.view.name} setView={this.setView}/>
           <ProductDetails params={this.state.view.params} setView={this.setView} />
         </div>
       );
@@ -68,7 +78,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'reports') {
       return (
         <div>
-          <Header setView={this.setView}/>
+          <Header view={this.state.view.name} setView={this.setView}/>
           <Reports setView={this.setView}/>
         </div>
       );
@@ -77,7 +87,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'lowInvReport') {
       return (
         <div>
-          <Header/>
+          <Header view={this.state.view.name} setView={this.setView}/>
           <LowInvReport setView={this.setView} product={this.state.product}/>
         </div>
       );

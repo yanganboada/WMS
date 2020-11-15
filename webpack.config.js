@@ -41,7 +41,7 @@ module.exports = {
     watchOptions: {
       ignored: [
         path.join(__dirname, 'server/public/images'),
-        path.join(__dirname, 'server/public/upload')
+        path.join(__dirname, 'server/public/uploads')
       ]
     }
   }
