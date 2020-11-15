@@ -72,7 +72,11 @@ export default class Header extends React.Component {
             }
           </div>
           <span>
-            <h5>{this.props.view}</h5>
+            <h5>
+              {this.props.view
+                .replace(/([A-Z])/g, ' $1')
+                .replace(/^./, str => str.toUpperCase())}
+            </h5>
           </span>
         </nav>
       </div>
