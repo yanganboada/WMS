@@ -8,17 +8,17 @@ export default class LocationTable extends React.Component {
   renderTableData() {
     return (
       this.props.product.map((product, index) => {
-          const { sku, color, location, qty } = product;
-          return (
-            <tr key={index}>
-              <td>{sku}</td>
-              <td>{color}</td>
-              <td>{location}</td>
-              <td>{qty}</td>
-            </tr>
-          )
-        })
-    )
+        const { sku, color, location, qty } = product;
+        return (
+          <tr key={index}>
+            <td>{sku}</td>
+            <td>{color}</td>
+            <td>{location}</td>
+            <td>{qty}</td>
+          </tr>
+        );
+      })
+    );
   }
 
   render() {

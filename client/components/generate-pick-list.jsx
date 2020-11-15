@@ -18,7 +18,7 @@ export default class GeneratePickList extends React.Component {
   hangdleFileChange(e) {
     this.setState({
       csvFile: e.target.files[0]
-    })
+    });
   }
 
   handleGenerate(e) {
@@ -31,7 +31,7 @@ export default class GeneratePickList extends React.Component {
       body: formData
     })
       .then(response => response.json())
-      .then( data =>{
+      .then(data => {
         fetch('/api/products-location', {
           method: 'POST',
           headers: {
@@ -41,10 +41,10 @@ export default class GeneratePickList extends React.Component {
         })
           .then(response => response.json())
           .then(product => {
-            data.sort((a, b) => a[location] - b[location])
-            this.setState({ product })
+            data.sort((a, b) => a[location] - b[location]);
+            this.setState({ product });
           })
-          .catch(err => console.error(err))
+          .catch(err => console.error(err));
       })
       .catch(error => {
         console.error(error);
@@ -95,7 +95,7 @@ export default class GeneratePickList extends React.Component {
                 ref={r => this.csvLink = r}
                 target="_blank" />
               <LocationTable product={this.state.product} />
-              </div>
+            </div>
             : <div></div>
           }
         </div>
