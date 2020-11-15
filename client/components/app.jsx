@@ -4,6 +4,7 @@ import HomePage from './home-page';
 import ProductList from './product-list';
 import AddEditProduct from './add-edit-product';
 import ImportProducts from './import-products';
+import ExportProducts from './export-products';
 import ProductDetails from './product-details';
 import Reports from './reports';
 import LowInvReport from './low-inv-report';
@@ -13,7 +14,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'importProducts',
+        name: 'homePage',
         params: {}
       },
       product: []
@@ -44,6 +45,8 @@ export default class App extends React.Component {
         return <LowInvReport setView={this.setView} product={this.state.product} />;
       case 'importProducts':
         return <ImportProducts setView={this.setView} />;
+      case 'exportProducts':
+        return <ExportProducts setView={this.setView} />;
     }
   }
 
@@ -64,7 +67,6 @@ export default class App extends React.Component {
       );
     }
   }
-
 
   // render() {
   //   if (this.state.view.name === 'homePage') {
@@ -120,5 +122,5 @@ export default class App extends React.Component {
   //     );
   //   }
   // }
-  
+
 }

@@ -1,0 +1,4 @@
+sku,color,qty,name,categoryId,supplierId,cost,shippingCost,size,location,imageUrl,status,supplier,category
+PT04B,black,345,large dog tag black,3,3,2.85,0.15,50*29mm,CLC5X3,images/PT04GE28.jpg,TRUE,Jienuo Stainless,Dog Tag
+PT04G,gold,234,large dog tag gold,3,3,2.35,0.15,50*29mm,CLC5X4,images/PT04I.jpg,TRUE,Jienuo Stainless,Dog Tag
+PT04I,rainbow,2,large dog tag rainbow,1,3,2.85,0.15,50*29mm,CLC5X5,images/PT04S.jpg,TRUE,Jienuo Stainless,Dog Tag
