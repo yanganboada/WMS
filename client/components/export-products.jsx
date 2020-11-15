@@ -1,7 +1,8 @@
 import React from 'react';
 import Table from './table';
+import { CSVLink } from 'react-csv';
 
-export default class ProductList extends React.Component {
+export default class ExportProducts extends React.Component {
 
   constructor(props) {
     super(props);
@@ -15,12 +16,14 @@ export default class ProductList extends React.Component {
       sort: {
         column: null,
         direction: 'desc'
-      }
+      },
+      dowload: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClearFilter = this.handleClearFilter.bind(this);
     this.handleChangeFilterName = this.handleChangeFilterName.bind(this);
     this.handleChangeFilterValue = this.handleChangeFilterValue.bind(this);
-    this.handleClearFilter = this.handleClearFilter.bind(this);
+    this.handleDownload = this.handleDownload.bind(this);
   }
 
   componentDidMount() {
@@ -62,7 +65,6 @@ export default class ProductList extends React.Component {
         }
       })
       .catch(err => console.error(err));
-
   }
 
   handleClearFilter() {
@@ -70,26 +72,37 @@ export default class ProductList extends React.Component {
       isFilter: false,
       filterName: '',
       filterValue: '',
-      errorMessage: false
+      errorMessage: false,
+      filterProduct: []
     });
+  }
+
+  handleDownload() {
+    this.csvLink.link.click();
   }
 
   render() {
     return (
       <div>
         <div className="d-flex justify-content-center">
-          <button className="add-product btn-blue m-3"
-            onClick={() => this.props.setView('addEditProduct', {})}>
-            Add Product
+          <button className="add-product btn-blue m-2 mt-3" onClick={this.handleDownload}>
+              Download
           </button>
+          <CSVLink
+            data={this.state.filterProduct.length
+              ? this.state.filterProduct
+              : this.state.product}
+            filename="productDownload.csv"
+            className="hidden"
+            ref={r => this.csvLink=r }
+            target="_blank" />
         </div>
-
         <div className="row justify-content-center m-auto col-md-3">
           <div className="d-flex justify-content-center align-items-center">
 
             <form onSubmit={this.handleChangeFilterName}>
               <select className="form-control mr-3 filter-drop-down" onChange={this.handleChangeFilterName}>
-                <option>Filter</option>
+                <option disabled>Filter</option>
                 <option value="sku">SKU</option>
                 <option value="name">Name</option>
                 <option value="category">Category</option>
@@ -105,21 +118,21 @@ export default class ProductList extends React.Component {
                 onChange={this.handleChangeFilterValue}
                 placeholder="Filter..."></input>
             </form>
-            <button className="btn-blue m-3 btn-filter" onClick={this.handleSubmit}>Filter</button>
+            {!this.state.filterProduct.length
+              ? this.state.filterValue === '' || this.state.errorMessage
+                ? <button className="btn-grey m-3 btn-filter" disabled >Filter</button>
+                : <button className="btn-green m-3 btn-filter" type="submit" onClick={this.handleSubmit}>Filter</button>
+              : <button className="btn-red m-3 btn-filter" type="reset" onClick={this.handleClearFilter}>Clear</button>
+            }
           </div>
           {this.state.errorMessage
-            ? <div className="d-flex justify-content-center m-auto"><p>Sorry, there is no product in the inventory with that information.</p></div>
+            ? <div className="d-flex justify-content-center m-auto text-muted"><p>No record found</p></div>
             : <p className="d-none"></p>
           }
         </div>
 
         {this.state.isFilter
-          ? <div>
-            <Table product={this.state.filterProduct} />
-            <div className="d-flex justify-content-center">
-              <button className="btn-blue m-3" onClick={this.handleClearFilter} >Clear Filter</button>
-            </div>
-          </div>
+          ? <Table product={this.state.filterProduct} />
           : <Table product={this.state.product} setView={this.props.setView} />
         }
 

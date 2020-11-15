@@ -3,6 +3,8 @@ import Header from './header';
 import HomePage from './home-page';
 import ProductList from './product-list';
 import AddEditProduct from './add-edit-product';
+import ImportProducts from './import-products';
+import ExportProducts from './export-products';
 import ProductDetails from './product-details';
 import Reports from './reports';
 import LowInvReport from './low-inv-report';
@@ -13,7 +15,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'categoryReport',
+        name: 'homePage',
         params: {}
       },
       product: []
@@ -44,6 +46,10 @@ export default class App extends React.Component {
         return <LowInvReport setView={this.setView} product={this.state.product} />;
       case 'categoryReport':
         return <CategoryReport setView={this.setView} product={this.state.product} />;
+      case 'importProducts':
+        return <ImportProducts setView={this.setView} />;
+      case 'exportProducts':
+        return <ExportProducts setView={this.setView} />;
     }
   }
 
@@ -58,66 +64,10 @@ export default class App extends React.Component {
     } else {
       return (
         <div>
-          <Header setView={this.setView} />
+          <Header view={this.state.view.name} setView={this.setView} />
           { this.renderSwtich(this.state.view.name)}
         </div>
       );
     }
   }
-
-  // render() {
-  //   if (this.state.view.name === 'homePage') {
-  //     return (
-  //       <div>
-  //         <HomePage setView={this.setView}/>
-  //       </div>
-  //     );
-  //   }
-
-  //   if (this.state.view.name === 'productList') {
-  //     return (
-  //       <div>
-  //         <Header setView={this.setView}/>
-  //         <ProductList setView={this.setView} product={this.state.product} />
-  //       </div>
-  //     );
-  //   }
-
-  //   if (this.state.view.name === 'addEditProduct') {
-  //     return (
-  //       <div>
-  //         <Header setView={this.setView}/>
-  //         <AddEditProduct params={this.state.view.params} setView={this.setView}/>
-  //       </div>
-  //     );
-  //   }
-
-  //   if (this.state.view.name === 'productDetails') {
-  //     return (
-  //       <div>
-  //         <Header setView={this.setView}/>
-  //         <ProductDetails params={this.state.view.params} setView={this.setView} />
-  //       </div>
-  //     );
-  //   }
-
-  //   if (this.state.view.name === 'reports') {
-  //     return (
-  //       <div>
-  //         <Header setView={this.setView}/>
-  //         <Reports setView={this.setView}/>
-  //       </div>
-  //     );
-  //   }
-
-  //   if (this.state.view.name === 'lowInvReport') {
-  //     return (
-  //       <div>
-  //         <Header/>
-  //         <LowInvReport setView={this.setView} product={this.state.product}/>
-  //       </div>
-  //     );
-  //   }
-
-  // }
 }
