@@ -271,6 +271,24 @@ app.get('/api/products-filter', (req, res, next) => {
 
 });
 
+app.get('/api/products-category', (req, res, next) => {
+  const sql = `
+    select "p"."qty" as "quantity",
+           "p"."cost",
+           "c"."categoryName" as "category"
+      from "products" as "p"
+      join "category" as "c" using ("categoryId")
+  `;
+
+  db.query(sql)
+    .then(result => {
+      const product = result.rows;
+      res.status(200).json(product);
+    })
+    .catch(err => console.error(err));
+
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
