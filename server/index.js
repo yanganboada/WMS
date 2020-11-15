@@ -238,19 +238,19 @@ app.get('/api/products-filter', (req, res, next) => {
     whereSql = 'where name ILIKE $1';
     values.push(`%${req.query.name}%`);
 
-  } else if (req.query.categoryName) {
-    whereSql = 'where categoryName=$1';
-    values.push(`%${req.query.categoryName}%`);
+  } else if (req.query.category) {
+    whereSql = 'where "c"."categoryName" ILIKE $1';
+    values.push(`%${req.query.category}%`);
 
   } else if (req.query.qty) {
-    whereSql = 'where qty=$1';
-    values.push(`%${req.query.qty}%`);
+    whereSql = 'where qty = $1';
+    values.push(`${req.query.qty}`);
   }
 
   db.query(`${sql} ${whereSql}`, values)
     .then(result => {
       if (result.rowCount === 0) {
-        next(new ClientError('There is no data with that value', 404));
+        res.status(200).json([]);
       } else {
         res.status(200).json(result.rows);
       }

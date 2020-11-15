@@ -185,6 +185,10 @@ button:hover {
   color: #457B9D
 }
 
+.btn-filter{
+  width: 90px;
+}
+
 .icon-blue{
   color: #1D3557;
 }
@@ -208,6 +212,10 @@ button:hover {
 
 .tbody-container {
   font-size: 12px;
+}
+
+.filter-drop-down {
+  max-width: 80%;
 }
 
 .menu {
