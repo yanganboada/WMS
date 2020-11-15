@@ -4,6 +4,7 @@ const db = require('./database');
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
 const sessionMiddleware = require('./session-middleware');
+const csv = require('csvtojson');
 
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -120,7 +121,18 @@ app.post('/api/images', upload.single('imageUpload'), (req, res, next) => {
   if (!image) {
     next(new ClientError('please upload a image', 404));
   }
-  res.json(image);
+  res.status(200).json(image);
+});
+
+app.post('/api/uploads', upload.single('csvUpload'), (req, res, next) => {
+  const csvFile = req.file;
+  const path = req.file.path;
+  if (!csvFile) {
+    next(new ClientError('please upload a csv file', 404));
+  }
+  csv()
+    .fromFile(path)
+    .then(response => res.status(200).json(response));
 });
 
 app.patch('/api/products/:productId', (req, res, next) => {

@@ -14,6 +14,7 @@ export default class Header extends React.Component {
       isMenuShow: !this.state.isMenuShow
     });
   }
+
   render() {
     return (
       <div>
@@ -66,12 +67,12 @@ export default class Header extends React.Component {
                         <p className='pl-3 text-white'>Reports</p>
                       </div>
                     </li>
-                    </ul>
-                  </div>
+                  </ul>
+                </div>
             }
           </div>
           <span>
-            <h4>Name</h4>
+            <h5>{this.props.view}</h5>
           </span>
         </nav>
       </div>

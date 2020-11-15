@@ -3,6 +3,7 @@ import Header from './header';
 import HomePage from './home-page';
 import ProductList from './product-list';
 import AddEditProduct from './add-edit-product';
+import ImportProducts from './import-products';
 import ProductDetails from './product-details';
 import Reports from './reports';
 import LowInvReport from './low-inv-report';
@@ -12,7 +13,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'productList',
+        name: 'importProducts',
         params: {}
       },
       product: []
@@ -41,6 +42,8 @@ export default class App extends React.Component {
         return <Reports setView={this.setView} />;
       case 'lowInvReport':
         return <LowInvReport setView={this.setView} product={this.state.product} />;
+      case 'importProducts':
+        return <ImportProducts setView={this.setView} />;
     }
   }
 
@@ -55,12 +58,13 @@ export default class App extends React.Component {
     } else {
       return (
         <div>
-          <Header setView={this.setView} />
+          <Header view={this.state.view.name} setView={this.setView} />
           { this.renderSwtich(this.state.view.name)}
         </div>
       );
     }
   }
+
 
   // render() {
   //   if (this.state.view.name === 'homePage') {
@@ -115,6 +119,6 @@ export default class App extends React.Component {
   //       </div>
   //     );
   //   }
-
   // }
+  
 }
