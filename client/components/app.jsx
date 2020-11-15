@@ -30,68 +30,95 @@ export default class App extends React.Component {
     });
   }
 
+  renderSwtich(state) {
+    switch (state) {
+      case 'productList':
+        return <ProductList setView={this.setView} product={this.state.product} />;
+      case 'addEditProduct':
+        return <AddEditProduct params={this.state.view.params} setView={this.setView}/>;
+      case 'productDetails':
+        return <ProductDetails params={this.state.view.params} setView={this.setView} />;
+      case 'reports':
+        return <Reports setView={this.setView} />;
+      case 'lowInvReport':
+        return <LowInvReport setView={this.setView} product={this.state.product} />;
+      case 'importProducts':
+        return <ImportProducts setView={this.setView} />;
+    }
+  }
+
   render() {
+
     if (this.state.view.name === 'homePage') {
       return (
         <div>
-          <HomePage setView={this.setView}/>
+          <HomePage setView={this.setView} />
         </div>
       );
-    }
-
-    if (this.state.view.name === 'productList') {
-      return (
-        <div>
-          <Header view={this.state.view.name} setView={this.setView}/>
-          <ProductList setView={this.setView} product={this.state.product} />
-        </div>
-      );
-    }
-
-    if (this.state.view.name === 'addEditProduct') {
-      return (
-        <div>
-          <Header view={this.state.view.name} setView={this.setView}/>
-          <AddEditProduct params={this.state.view.params} setView={this.setView}/>
-        </div>
-      );
-    }
-
-    if (this.state.view.name === 'importProducts') {
+    } else {
       return (
         <div>
           <Header view={this.state.view.name} setView={this.setView} />
-          <ImportProducts setView={this.setView} />
+          { this.renderSwtich(this.state.view.name)}
         </div>
       );
     }
-
-    if (this.state.view.name === 'productDetails') {
-      return (
-        <div>
-          <Header view={this.state.view.name} setView={this.setView}/>
-          <ProductDetails params={this.state.view.params} setView={this.setView} />
-        </div>
-      );
-    }
-
-    if (this.state.view.name === 'reports') {
-      return (
-        <div>
-          <Header view={this.state.view.name} setView={this.setView}/>
-          <Reports setView={this.setView}/>
-        </div>
-      );
-    }
-
-    if (this.state.view.name === 'lowInvReport') {
-      return (
-        <div>
-          <Header view={this.state.view.name} setView={this.setView}/>
-          <LowInvReport setView={this.setView} product={this.state.product}/>
-        </div>
-      );
-    }
-
   }
+
+
+  // render() {
+  //   if (this.state.view.name === 'homePage') {
+  //     return (
+  //       <div>
+  //         <HomePage setView={this.setView}/>
+  //       </div>
+  //     );
+  //   }
+
+  //   if (this.state.view.name === 'productList') {
+  //     return (
+  //       <div>
+  //         <Header setView={this.setView}/>
+  //         <ProductList setView={this.setView} product={this.state.product} />
+  //       </div>
+  //     );
+  //   }
+
+  //   if (this.state.view.name === 'addEditProduct') {
+  //     return (
+  //       <div>
+  //         <Header setView={this.setView}/>
+  //         <AddEditProduct params={this.state.view.params} setView={this.setView}/>
+  //       </div>
+  //     );
+  //   }
+
+  //   if (this.state.view.name === 'productDetails') {
+  //     return (
+  //       <div>
+  //         <Header setView={this.setView}/>
+  //         <ProductDetails params={this.state.view.params} setView={this.setView} />
+  //       </div>
+  //     );
+  //   }
+
+  //   if (this.state.view.name === 'reports') {
+  //     return (
+  //       <div>
+  //         <Header setView={this.setView}/>
+  //         <Reports setView={this.setView}/>
+  //       </div>
+  //     );
+  //   }
+
+  //   if (this.state.view.name === 'lowInvReport') {
+  //     return (
+  //       <div>
+  //         <Header/>
+  //         <LowInvReport setView={this.setView} product={this.state.product}/>
+  //       </div>
+  //     );
+  //   }
+  // }
+  
 }
