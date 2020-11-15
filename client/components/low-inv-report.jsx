@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from './table';
+// import { CSVLink } from 'react-csv';
 
 export default class LowInvReport extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class LowInvReport extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDownload = this.handleDownload.bind(this);
   }
 
   handleChange(e) {
@@ -24,6 +26,10 @@ export default class LowInvReport extends React.Component {
       })
       .catch(err => console.error(err));
   }
+
+  // handleDownload() {
+  //   this.csvLink.link.click();
+  // }
 
   render() {
     return (
@@ -49,7 +55,7 @@ export default class LowInvReport extends React.Component {
         </form>
         <div className="d-flex justify-content-center align-items-center">
           <button className="add-product btn-blue m-3" onClick={this.handleSubmit}>Generate</button>
-          <button className="add-product btn-blue m-3" onClick={() => event.preventDefault()}>Download</button>
+          <button className="add-product btn-blue m-3" onClick={this.handleDownload}>Download</button>
         </div>
 
         {this.state.product.length !== 0

@@ -6,13 +6,14 @@ import AddEditProduct from './add-edit-product';
 import ProductDetails from './product-details';
 import Reports from './reports';
 import LowInvReport from './low-inv-report';
+import CategoryReport from './category-report';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'productList',
+        name: 'categoryReport',
         params: {}
       },
       product: []
@@ -41,6 +42,8 @@ export default class App extends React.Component {
         return <Reports setView={this.setView} />;
       case 'lowInvReport':
         return <LowInvReport setView={this.setView} product={this.state.product} />;
+      case 'categoryReport':
+        return <CategoryReport setView={this.setView} product={this.state.product} />;
     }
   }
 
