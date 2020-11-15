@@ -6,6 +6,7 @@ import AddEditProduct from './add-edit-product';
 import ImportProducts from './import-products';
 import ExportProducts from './export-products';
 import ProductDetails from './product-details';
+import GeneratePickList from './generate-pick-list';
 import Reports from './reports';
 import LowInvReport from './low-inv-report';
 
@@ -36,7 +37,7 @@ export default class App extends React.Component {
       case 'productList':
         return <ProductList setView={this.setView} product={this.state.product} />;
       case 'addEditProduct':
-        return <AddEditProduct params={this.state.view.params} setView={this.setView}/>;
+        return <AddEditProduct params={this.state.view.params} setView={this.setView} />;
       case 'productDetails':
         return <ProductDetails params={this.state.view.params} setView={this.setView} />;
       case 'reports':
@@ -47,6 +48,8 @@ export default class App extends React.Component {
         return <ImportProducts setView={this.setView} />;
       case 'exportProducts':
         return <ExportProducts setView={this.setView} />;
+      case 'generatePickList':
+        return <GeneratePickList setView={this.setView} />;
     }
   }
 

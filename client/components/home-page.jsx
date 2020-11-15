@@ -38,7 +38,7 @@ export default class HomePage extends React.Component {
             </div>
           </button>
 
-          <button className="btn-gen-pick-list m-3" onClick={() => this.props.setView('genPickList', {})}>
+          <button className="btn-gen-pick-list m-3" onClick={() => this.props.setView('generatePickList', {})}>
             <i className="far fa-file-alt fa-4x icon-blue"></i>
             <div>
               Generate Pick List

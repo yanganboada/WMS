@@ -50,7 +50,7 @@ export default class Header extends React.Component {
                       </div>
                     </li>
                     <li className='nav-item'>
-                      <div className='row p-3 justify-content-start align-items-baseline' onClick={() => this.props.setView('genPickList', {})}>
+                      <div className='row p-3 justify-content-start align-items-baseline' onClick={() => this.props.setView('generatePickList', {})}>
                         <i className="fas fa-file-alt icon-white"></i>
                         <p className='pl-3 text-white'>Generate Pick List</p>
                       </div>
