@@ -19,9 +19,6 @@ export default class ImportProducts extends React.Component {
       fileUrl: URL.createObjectURL(e.target.files[0]),
       csvFile: e.target.files[0]
     });
-
-    console.log(e.target.files[0]);
-
   }
 
   handlePreview(e) {

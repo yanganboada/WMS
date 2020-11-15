@@ -53,7 +53,6 @@ app.get('/api/products', (req, res, next) => {
       res.status(200).json(product);
     })
     .catch(err => console.error(err));
-
 });
 
 app.post('/api/products', (req, res, next) => {
@@ -133,6 +132,37 @@ app.post('/api/uploads', upload.single('csvUpload'), (req, res, next) => {
   csv()
     .fromFile(path)
     .then(response => res.status(200).json(response));
+});
+
+app.post('/api/products-location', (req, res, next) => {
+  let skuList = '';
+  req.body.forEach(product => {
+    req.body.indexOf(product) === req.body.length - 1
+      ? skuList += `${product.sku}`
+      : skuList += `${product.sku}, `;
+  });
+
+  const sql = `
+  select "productId",
+  "sku",
+  "color",
+  "location"
+  from "products"
+  where "sku" ILIKE $1
+  order by "location"
+  returning *
+  `;
+
+  const value = [skuList];
+  console.log(skuList, value);
+
+  db.query(sql, value)
+    .then(result => {
+      const product = result.rows;
+      Object.assign(product, req.body);
+      res.status(200).json(product);
+    })
+    .catch(err => console.error(err));
 });
 
 app.patch('/api/products/:productId', (req, res, next) => {
