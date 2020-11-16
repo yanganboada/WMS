@@ -10,13 +10,14 @@ import GeneratePickList from './generate-pick-list';
 import Reports from './reports';
 import LowInvReport from './low-inv-report';
 import CategoryReport from './category-report';
+import POSuggestion from './po-suggestion';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'homePage',
+        name: 'poSuggestions',
         params: {}
       },
       product: []
@@ -53,6 +54,8 @@ export default class App extends React.Component {
         return <ExportProducts setView={this.setView} />;
       case 'generatePickList':
         return <GeneratePickList setView={this.setView} />;
+      case 'poSuggestions':
+        return <POSuggestion setView={this.setView} />
     }
   }
 

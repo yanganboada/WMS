@@ -10,12 +10,12 @@ export default class GeneratePickList extends React.Component {
       product: [],
       csvFile: null
     };
-    this.hangdleFileChange = this.hangdleFileChange.bind(this);
+    this.handleFileChange = this.handleFileChange.bind(this);
     this.handleGenerate = this.handleGenerate.bind(this);
     this.handleDownload = this.handleDownload.bind(this);
   }
 
-  hangdleFileChange(e) {
+  handleFileChange(e) {
     this.setState({
       csvFile: e.target.files[0],
       product: []
@@ -68,7 +68,7 @@ export default class GeneratePickList extends React.Component {
                 className="custom-file-input"
                 id="csvUpload"
                 name="csvUpload"
-                onChange={this.hangdleFileChange} />
+                onChange={this.handleFileChange} />
               <label
                 className="custom-file-label text-muted"
                 htmlFor="customFile">
