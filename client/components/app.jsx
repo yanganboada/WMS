@@ -55,7 +55,7 @@ export default class App extends React.Component {
       case 'generatePickList':
         return <GeneratePickList setView={this.setView} />;
       case 'poSuggestions':
-        return <POSuggestion setView={this.setView} />
+        return <POSuggestion setView={this.setView} />;
     }
   }
 

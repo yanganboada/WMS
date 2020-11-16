@@ -137,7 +137,7 @@ app.post('/api/products-location', (req, res, next) => {
   req.body.forEach(product => {
     skuList.push(product.sku);
   });
-  console.log("req.body", req.body)
+  console.log('req.body', req.body);
 
   const sql = `
   select "productId",
@@ -338,45 +338,44 @@ app.post('/api/po-suggest', (req, res, next) => {
       from "products"
       where "qty" <= 20 AND
             "cost" <= $1
-  `
-  //use where clause looking for qty <= 20
-  //list of item to buy
+  `;
+  // use where clause looking for qty <= 20
+  // list of item to buy
 
+  const suggestions = [];
+  let totalBudget = 0;
 
-  let suggestions = []
-  let totalBudget = 0
-
-  const values = [req.body.cost]
-  console.log("values", values)
+  const values = [req.body.cost];
+  console.log('values', values);
 
   db.query(sql, values)
     .then(result => {
 
-      totalBudget = values
+      totalBudget = values;
 
-      for (const prop in result.rows){
+      for (const prop in result.rows) {
 
         // console.log("prop", prop)
         // console.log("result.rows[prop]", result.rows[prop])
         // console.log("result.rows[prop].cost", result.rows[prop].cost)
 
-        if (result.rows[prop].cost <= totalBudget && totalBudget !== 0){
-          suggestions.push(result.rows[prop])
-          console.log("suggestions", suggestions)
-          totalBudget -= result.rows[prop].cost
-          console.log("totalBudget", totalBudget)
+        if (result.rows[prop].cost <= totalBudget && totalBudget !== 0) {
+          suggestions.push(result.rows[prop]);
+          console.log('suggestions', suggestions);
+          totalBudget -= result.rows[prop].cost;
+          console.log('totalBudget', totalBudget);
         }
       }
 
       if (result.rowCount === 0) {
-        res.status(200).json([])
+        res.status(200).json([]);
       } else {
         // console.log("result", result)
-        res.status(200).json(suggestions)
+        res.status(200).json(suggestions);
       }
     })
-    .catch(err => console.error(err))
-})
+    .catch(err => console.error(err));
+});
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));

@@ -102,16 +102,16 @@ export default class CategoryReport extends React.Component {
 
         <div className="row justify-content-center align-items-center mt-3">
           <div>
-          <div>
-            <p>Necklace: ${(this.state.necklaceQty * this.state.necklaceCost).toFixed(2)}</p>
+            <div>
+              <p>Necklace: ${(this.state.necklaceQty * this.state.necklaceCost).toFixed(2)}</p>
+            </div>
+            <div>
+              <p>Dog Tag: ${(this.state.dogTagQty * this.state.dogTagCost).toFixed(2)}</p>
+            </div>
+            <div>
+              <p>Packaging: ${(this.state.packagingQty * this.state.packagingCost).toFixed(2)}</p>
+            </div>
           </div>
-          <div>
-            <p>Dog Tag: ${(this.state.dogTagQty * this.state.dogTagCost).toFixed(2)}</p>
-          </div>
-          <div>
-            <p>Packaging: ${(this.state.packagingQty * this.state.packagingCost).toFixed(2)}</p>
-          </div>
-        </div>
         </div>
 
       </div>
