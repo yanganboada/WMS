@@ -8,7 +8,7 @@ export default class Reports extends React.Component {
         <div className="d-flex justify-content-center flex-wrap">
           <button
             className="btn-low-inv m-3 d-flex justify-content-center align-items-center"
-            onClick={() => this.props.setView('lowInvReport', {})}>
+            onClick={() => this.props.setView('lowInventoryReport', {})}>
               Low Inventory Report
           </button>
           <button

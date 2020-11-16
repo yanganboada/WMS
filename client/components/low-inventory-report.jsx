@@ -2,7 +2,7 @@ import React from 'react';
 import Table from './table';
 // import { CSVLink } from 'react-csv';
 
-export default class LowInvReport extends React.Component {
+export default class LowInventoryReport extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

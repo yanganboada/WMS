@@ -137,7 +137,6 @@ app.post('/api/products-location', (req, res, next) => {
   req.body.forEach(product => {
     skuList.push(product.sku);
   });
-  console.log('req.body', req.body);
 
   const sql = `
   select "productId",
