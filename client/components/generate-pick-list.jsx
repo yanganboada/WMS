@@ -88,7 +88,7 @@ export default class GeneratePickList extends React.Component {
             ? <div>
               <div className='row justify-content-center'>
                 <button className="btn-blue text-center mb-4" onClick={this.handleDownload}>
-                  Download
+                    Download
                 </button>
                 <CSVLink
                   data={this.state.product}
