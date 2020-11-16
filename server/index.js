@@ -329,7 +329,7 @@ app.get('/api/products-category', (req, res, next) => {
 
 });
 
-app.post('/api/products-suggest', (req, res, next) => {
+app.post('/api/po-suggest', (req, res, next) => {
   const sql = `
     select "sku",
            "name",

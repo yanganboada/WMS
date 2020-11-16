@@ -23,7 +23,7 @@ export default class POSuggestion extends React.Component {
     //send fetch request with post
     //respond, set list to state
 
-    fetch(`/api/products-suggest`, {
+    fetch(`/api/po-suggest`, {
       method: POST,
       headers: {
         'Content-Type': 'application/json'

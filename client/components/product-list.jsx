@@ -12,6 +12,7 @@ export default class ProductList extends React.Component {
       isFilter: false,
       filterProduct: [],
       errorMessage: false,
+      btnClear: false,
       sort: {
         column: null,
         direction: 'desc'
@@ -70,7 +71,8 @@ export default class ProductList extends React.Component {
       isFilter: false,
       filterName: '',
       filterValue: '',
-      errorMessage: false
+      errorMessage: false,
+      filterProduct: []
     });
   }
 
@@ -105,7 +107,13 @@ export default class ProductList extends React.Component {
                 onChange={this.handleChangeFilterValue}
                 placeholder="Filter..."></input>
             </form>
-            <button className="btn-blue m-3 btn-filter" onClick={this.handleSubmit}>Filter</button>
+            {!this.state.filterProduct.length
+              ? this.state.filterValue === '' || this.state.errorMessage
+                ? <button className="btn-grey m-3 btn-filter" disabled >Filter</button>
+                : <button className="btn-green m-3 btn-filter" type="submit" onClick={this.handleSubmit}>Filter</button>
+              : <button className="btn-red m-3 btn-filter" type="reset" onClick={this.handleClearFilter}>Clear</button>
+            }
+
           </div>
           {this.state.errorMessage
             ? <div className="d-flex justify-content-center m-auto"><p>Sorry, there is no product in the inventory with that information.</p></div>
@@ -113,15 +121,13 @@ export default class ProductList extends React.Component {
           }
         </div>
 
-        {this.state.isFilter
-          ? <div>
-            <Table product={this.state.filterProduct} />
-            <div className="d-flex justify-content-center">
-              <button className="btn-blue m-3" onClick={this.handleClearFilter} >Clear Filter</button>
-            </div>
-          </div>
-          : <Table product={this.state.product} setView={this.props.setView} />
-        }
+        <div>
+          {this.state.isFilter
+            ? <Table product={this.state.filterProduct} />
+            : <Table product={this.state.product} setView={this.props.setView} />
+          }
+        </div>
+
 
       </div>
 
