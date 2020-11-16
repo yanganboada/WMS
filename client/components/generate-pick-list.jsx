@@ -86,19 +86,19 @@ export default class GeneratePickList extends React.Component {
           </form>
           {this.state.product.length
             ? <div>
-                <div className='row justify-content-center'>
-                  <button className="btn-blue text-center mb-4" onClick={this.handleDownload}>
+              <div className='row justify-content-center'>
+                <button className="btn-blue text-center mb-4" onClick={this.handleDownload}>
                     Download
-                  </button>
-                  <CSVLink
-                    data={this.state.product}
-                    filename="pickList.csv"
-                    className="hidden"
-                    ref={r => this.csvLink = r}
-                    target="_blank" />
-                </div>
-                <LocationTable product={this.state.product} />
+                </button>
+                <CSVLink
+                  data={this.state.product}
+                  filename="pickList.csv"
+                  className="hidden"
+                  ref={r => this.csvLink = r}
+                  target="_blank" />
               </div>
+              <LocationTable product={this.state.product} />
+            </div>
             : <div></div>
           }
         </div>

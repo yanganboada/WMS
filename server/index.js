@@ -137,7 +137,7 @@ app.post('/api/products-location', (req, res, next) => {
   req.body.forEach(product => {
     skuList.push(product.sku);
   });
-  console.log("req.body", req.body)
+  console.log('req.body', req.body);
 
   const sql = `
   select "productId",
@@ -184,31 +184,31 @@ app.get('/api/po-suggest/', (req, res, next) => {
       from "products"
       where "qty" <= 20
   `;
-  const budget = req.query.budget
+  const budget = req.query.budget;
 
   db.query(sql)
     .then(result => {
-      const product = result.rows
-      let totalEstimate = 0
+      const product = result.rows;
+      let totalEstimate = 0;
       product.map(product => {
-        poQty = 20 - product.qty
+        poQty = 20 - product.qty;
         product.qty = poQty;
-        totalEstimate += product.cost * poQty
-      })
+        totalEstimate += product.cost * poQty;
+      });
 
-      if (totalEstimate <= budget){
+      if (totalEstimate <= budget) {
         res.status(200).json(result.rows);
       } else {
-        poPersentage = budget / totalEstimate
+        poPersentage = budget / totalEstimate;
         product.map(product => {
-          product.qty = Math.floor(product.qty * poPersentage)
-        })
+          product.qty = Math.floor(product.qty * poPersentage);
+        });
         res.status(200).json(result.rows);
       }
 
     })
     .catch(err => console.error(err));
-})
+});
 
 app.patch('/api/products/:productId', (req, res, next) => {
   const productId = parseInt(req.params.productId, 10);

@@ -1,5 +1,5 @@
-import React from 'react'
-import PoTable from './po-table'
+import React from 'react';
+import PoTable from './po-table';
 import { CSVLink } from 'react-csv';
 
 export default class POSuggestion extends React.Component {
@@ -8,14 +8,14 @@ export default class POSuggestion extends React.Component {
     this.state = {
       budget: '',
       product: []
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSuggest = this.handleSuggest.bind(this)
-    this.handleDownload = this.handleDownload.bind(this)
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSuggest = this.handleSuggest.bind(this);
+    this.handleDownload = this.handleDownload.bind(this);
   }
 
   handleChange(e) {
-    this.setState({ budget: e.target.value })
+    this.setState({ budget: e.target.value });
   }
 
   handleSuggest() {
@@ -28,7 +28,7 @@ export default class POSuggestion extends React.Component {
   }
 
   handleDownload() {
-    this.csvLink.link.click()
+    this.csvLink.link.click();
   }
 
   render() {
@@ -38,7 +38,7 @@ export default class POSuggestion extends React.Component {
           <form onSubmit={this.handleChange}>
             <div className="d-flex justify-content-center align-items-center">
               Estimated Budget:
-            <div>
+              <div>
                 <input
                   type="number"
                   className="form-control form-control-sm ml-2"
@@ -57,14 +57,14 @@ export default class POSuggestion extends React.Component {
           <button className="add-product btn-blue m-3" onClick={this.handleSuggest}>Suggest</button>
           {this.state.product.length !== 0
             ? <div>
-                <button className="btn-blue m-3" onClick={this.handleDownload}>Download</button>
-                <CSVLink
-                  data={this.state.product}
-                  filename="poSuggest.csv"
-                  className="hidden"
-                  ref={r => this.csvLink = r}
-                  target="_blank" />
-              </div>
+              <button className="btn-blue m-3" onClick={this.handleDownload}>Download</button>
+              <CSVLink
+                data={this.state.product}
+                filename="poSuggest.csv"
+                className="hidden"
+                ref={r => this.csvLink = r}
+                target="_blank" />
+            </div>
             : <button className="btn-grey m-3">Download</button>
           }
         </div>
@@ -75,7 +75,7 @@ export default class POSuggestion extends React.Component {
         </div>
 
       </div>
-    )
+    );
   }
 
 }
