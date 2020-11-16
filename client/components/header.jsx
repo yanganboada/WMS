@@ -23,7 +23,7 @@ export default class Header extends React.Component {
             {
               !this.state.isMenuShow
                 ? <i className="fas fa-bars fa-lg" onClick={this.handelNavClick}></i>
-                : <div className="menu col-8 d-flex justify-content-start vh-100 position-fixed m-0 p-4">
+                : <div className="menu col-8 col-md-3 d-flex justify-content-start vh-100 position-fixed m-0 p-4">
                   <ul className='nav flex-column py-2 mt-4' onClick={this.handelNavClick}>
                     <li className='nav-item'>
                       <div className='row p-3 justify-content-start align-items-baseline' onClick={() => this.props.setView('homePage', {})}>
