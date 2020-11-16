@@ -11,7 +11,7 @@ export default class LowInvReport extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDownload = this.handleDownload.bind(this);
+    // this.handleDownload = this.handleDownload.bind(this);
   }
 
   handleChange(e) {

@@ -141,20 +141,19 @@ app.post('/api/products-location', (req, res, next) => {
       ? skuList += `${product.sku}`
       : skuList += `${product.sku}, `;
   });
+  console.log("req.body", req.body)
 
   const sql = `
-  select "productId",
-  "sku",
-  "color",
-  "location"
-  from "products"
-  where "sku" ILIKE $1
-  order by "location"
-  returning *
+    select "productId",
+           "sku",
+           "color",
+           "location"
+      from "products"
+      where "sku" IN ($1)
+      order by "location"
   `;
 
   const value = [skuList];
-  console.log(skuList, value);
 
   db.query(sql, value)
     .then(result => {
@@ -318,6 +317,55 @@ app.get('/api/products-category', (req, res, next) => {
     .catch(err => console.error(err));
 
 });
+
+app.post('/api/products-suggest', (req, res, next) => {
+  const sql = `
+    select "sku",
+           "name",
+           "qty",
+           "cost"
+      from "products"
+      where "qty" <= 20 AND
+            "cost" <= $1
+  `
+  //use where clause looking for qty <= 20
+  //list of item to buy
+
+
+  let suggestions = []
+  let totalBudget = 0
+
+  const values = [req.body.cost]
+  console.log("values", values)
+
+  db.query(sql, values)
+    .then(result => {
+
+      totalBudget = values
+
+      for (const prop in result.rows){
+
+        // console.log("prop", prop)
+        // console.log("result.rows[prop]", result.rows[prop])
+        // console.log("result.rows[prop].cost", result.rows[prop].cost)
+
+        if (result.rows[prop].cost <= totalBudget && totalBudget !== 0){
+          suggestions.push(result.rows[prop])
+          console.log("suggestions", suggestions)
+          totalBudget -= result.rows[prop].cost
+          console.log("totalBudget", totalBudget)
+        }
+      }
+
+      if (result.rowCount === 0) {
+        res.status(200).json([])
+      } else {
+        // console.log("result", result)
+        res.status(200).json(suggestions)
+      }
+    })
+    .catch(err => console.error(err))
+})
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
