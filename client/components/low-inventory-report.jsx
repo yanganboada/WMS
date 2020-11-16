@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from './table';
-// import { CSVLink } from 'react-csv';
+import { CSVLink } from 'react-csv';
 
 export default class LowInventoryReport extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ export default class LowInventoryReport extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleDownload = this.handleDownload.bind(this);
+    this.handleDownload = this.handleDownload.bind(this);
   }
 
   handleChange(e) {
@@ -27,9 +27,9 @@ export default class LowInventoryReport extends React.Component {
       .catch(err => console.error(err));
   }
 
-  // handleDownload() {
-  //   this.csvLink.link.click();
-  // }
+  handleDownload() {
+    this.csvLink.link.click();
+  }
 
   render() {
     return (
@@ -56,6 +56,12 @@ export default class LowInventoryReport extends React.Component {
         <div className="d-flex justify-content-center align-items-center">
           <button className="add-product btn-blue m-3" onClick={this.handleSubmit}>Generate</button>
           <button className="add-product btn-blue m-3" onClick={this.handleDownload}>Download</button>
+          <CSVLink
+            data={this.state.product}
+            filename="lowInventoryReport.csv"
+            className="hidden"
+            ref={r => this.csvLink = r}
+            target="_blank" />
         </div>
 
         {this.state.product.length !== 0

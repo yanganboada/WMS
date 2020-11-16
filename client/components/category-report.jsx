@@ -87,7 +87,7 @@ export default class CategoryReport extends React.Component {
           <p>Back to Report List -&gt;</p>
         </div>
 
-        <div className="card py-5">
+        <div className="card py-5 m-3">
           <div className="m-auto justify-content-center align-items-center pb-3">
             <h4>Inventory By Category</h4>
           </div>
@@ -100,7 +100,8 @@ export default class CategoryReport extends React.Component {
           />
         </div>
 
-        <div className="m-auto justify-content-center align-items-center">
+        <div className="row justify-content-center align-items-center mt-3">
+          <div>
           <div>
             <p>Necklace: ${(this.state.necklaceQty * this.state.necklaceCost).toFixed(2)}</p>
           </div>
@@ -110,6 +111,7 @@ export default class CategoryReport extends React.Component {
           <div>
             <p>Packaging: ${(this.state.packagingQty * this.state.packagingCost).toFixed(2)}</p>
           </div>
+        </div>
         </div>
 
       </div>

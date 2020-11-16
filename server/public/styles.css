@@ -231,3 +231,7 @@ button:hover {
   from { left: -20%; }
   to { left: 0; }
 }
+
+.navbar-class{
+  max-width: 60%
+}
