@@ -23,7 +23,7 @@ export default class AddEditProduct extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.hangdleImageChange = this.hangdleImageChange.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
   }
 
   componentDidMount() {
@@ -38,7 +38,7 @@ export default class AddEditProduct extends React.Component {
     }
   }
 
-  hangdleImageChange(e) {
+  handleImageChange(e) {
     this.setState({
       fields: Object.assign(this.state.fields, { imageUrl: URL.createObjectURL(e.target.files[0]) }),
       imageFile: e.target.files[0]
@@ -121,22 +121,22 @@ export default class AddEditProduct extends React.Component {
             <form encType="multipart/form-data" className="row justify-content-between" onSubmit={this.handleSubmit}>
               <div className='row m-2'>
                 <div className='col-6 flex-column'>
-                  <img className="col-12 card-img-left border"
+                  <img className="col-12 card-img-left border border-dark"
                     src={this.state.fields.imageUrl === ''
                       ? './images/image-holder.png'
                       : this.state.fields.imageUrl
                     }
-                    onChange={this.hangdleImageChange} />
+                    onChange={this.handleImageChange} />
                   <div className="custom-file">
                     <input
                       type="file"
-                      className="custom-file-input"
+                      className="custom-file-input border-dark"
                       id="imageUrl"
                       name="imageUpload"
                       accept="image/*"
-                      onChange={this.hangdleImageChange} />
+                      onChange={this.handleImageChange} />
                     <label
-                      className="custom-file-label"
+                      className="custom-file-label border-dark"
                       htmlFor="customFile">
                       Choose Image
                     </label>
@@ -148,7 +148,7 @@ export default class AddEditProduct extends React.Component {
                     <div className="ml-auto">
                       <input
                         type="text"
-                        className="form-control product-form form-control-sm"
+                        className="form-control product-form form-control-sm border-dark"
                         placeholder="Sku"
                         size="8"
                         id='sku'
@@ -162,7 +162,7 @@ export default class AddEditProduct extends React.Component {
                     <div className="ml-auto">
                       <input
                         type="text"
-                        className="form-control product-form form-control-sm"
+                        className="form-control product-form form-control-sm border-dark"
                         placeholder="Color"
                         size="8"
                         id='color'
@@ -176,7 +176,7 @@ export default class AddEditProduct extends React.Component {
                     <div className="ml-auto">
                       <input
                         type="text"
-                        className="form-control product-form form-control-sm"
+                        className="form-control product-form form-control-sm border-dark"
                         placeholder="Qty"
                         size="8"
                         id='qty'
@@ -194,7 +194,7 @@ export default class AddEditProduct extends React.Component {
                   <div className="ml-auto">
                     <input
                       type="text"
-                      className="form-control product-form form-control-sm"
+                      className="form-control product-form form-control-sm  border-dark"
                       placeholder="Name"
                       size="25"
                       id='name'
@@ -207,7 +207,7 @@ export default class AddEditProduct extends React.Component {
               Category:
                   <div className="ml-auto">
                     <select
-                      className="form-control-sm product-drop-down"
+                      className="form-control-sm product-drop-down border-dark"
                       id='categoryId'
                       value={this.state.fields.categoryId}
                       onChange={this.handleChange} required>
@@ -222,7 +222,7 @@ export default class AddEditProduct extends React.Component {
               Supplier:
                   <div className="ml-auto">
                     <select
-                      className="form-control-sm product-drop-down"
+                      className="form-control-sm product-drop-down border-dark"
                       id='supplierId'
                       value={this.state.fields.supplierId}
                       onChange={this.handleChange} required>
@@ -239,7 +239,7 @@ export default class AddEditProduct extends React.Component {
                   <div className="ml-auto">
                     <input
                       type="text"
-                      className="form-control product-form form-control-sm"
+                      className="form-control product-form form-control-sm border-dark"
                       placeholder="0.00"
                       size="25"
                       id='cost'
@@ -252,7 +252,7 @@ export default class AddEditProduct extends React.Component {
                   <div className="ml-auto">
                     <input
                       type="text"
-                      className="form-control product-form form-control-sm"
+                      className="form-control product-form form-control-sm border-dark"
                       placeholder="0.00"
                       size="25"
                       id='shippingCost'
@@ -265,7 +265,7 @@ export default class AddEditProduct extends React.Component {
                   <div className="ml-auto">
                     <input
                       type="text"
-                      className="form-control product-form form-control-sm"
+                      className="form-control product-form form-control-sm border-dark"
                       placeholder="4mmx4mmx4mm"
                       size="25"
                       id='size'
@@ -278,7 +278,7 @@ export default class AddEditProduct extends React.Component {
                   <div className="ml-auto">
                     <input
                       type="text"
-                      className="form-control product-form form-control-sm"
+                      className="form-control product-form form-control-sm border-dark"
                       placeholder="Location"
                       size="25"
                       id='location'

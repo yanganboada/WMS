@@ -48,7 +48,7 @@ export default class ProductDtails extends React.Component {
       ? <div className='container'>
         <div className='row card p-2'>
           <div className="back-arrow w-100 p-2 cursor text-muted font-italic d-flex justify-content-end" onClick={this.handleBackClick} >
-            back to product list -&gt;
+            Back to Product List -&gt;
           </div>
           <div className="row justify-content-center m-2">
             <img className="col-6 card-img-left border" src={this.state.product.imageUrl} alt={this.state.product.name} />

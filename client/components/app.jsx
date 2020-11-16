@@ -17,7 +17,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'poSuggestions',
+        name: 'homePage',
         params: {}
       },
       product: []

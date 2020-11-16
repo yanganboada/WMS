@@ -90,14 +90,15 @@ export default class ImportProducts extends React.Component {
                 : <button type='submit' className="btn-green mx-auto my-2">Preview</button>
             }
           </form>
-          {this.state.product.length
+
+          </div>
+            {this.state.product.length
             ? <div className='row justify-content-center'>
               <button type='submit' className="btn-blue text-center mb-4" onClick={this.handleSubmit}>Submit</button>
               <Table product={this.state.product} />
             </div>
             : <div></div>
           }
-        </div>
       </div>
     );
   }

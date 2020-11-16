@@ -1,0 +1,4 @@
+﻿sku,color,qty,name,categoryId,supplierId,cost,shippingCost,size,location,imageUrl,status,supplier,category
+PT04GE,black,345,Sample Product 1,3,3,2.85,0.15,50*29mm,CLC5X3,images/PT04GE.jpg,TRUE,Jienuo Stainless,Dog Tag
+PT04I,gold,234,Sample Product 2,3,3,2.35,0.15,50*29mm,CLC5X4,images/PT04I.jpg,TRUE,Jienuo Stainless,Dog Tag
+PT04S,rainbow,2,Sample Product 3,3,3,2.85,0.15,50*29mm,CLC5X5,images/PT04S.jpg,TRUE,Jienuo Stainless,Dog Tag
