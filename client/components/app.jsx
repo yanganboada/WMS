@@ -8,7 +8,7 @@ import ExportProducts from './export-products';
 import ProductDetails from './product-details';
 import GeneratePickList from './generate-pick-list';
 import Reports from './reports';
-import LowInvReport from './low-inv-report';
+import LowInventoryReport from './low-inventory-report';
 import CategoryReport from './category-report';
 import POSuggestion from './po-suggestion';
 
@@ -17,7 +17,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'poSuggestions',
+        name: 'homePage',
         params: {}
       },
       product: []
@@ -44,8 +44,8 @@ export default class App extends React.Component {
         return <ProductDetails params={this.state.view.params} setView={this.setView} />;
       case 'reports':
         return <Reports setView={this.setView} />;
-      case 'lowInvReport':
-        return <LowInvReport setView={this.setView} product={this.state.product} />;
+      case 'lowInventoryReport':
+        return <LowInventoryReport setView={this.setView} product={this.state.product} />;
       case 'categoryReport':
         return <CategoryReport setView={this.setView} product={this.state.product} />;
       case 'importProducts':

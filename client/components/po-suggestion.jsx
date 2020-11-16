@@ -1,5 +1,5 @@
-import React from 'react'
-import Table from './table'
+import React from 'react';
+import PoTable from './po-table';
 import { CSVLink } from 'react-csv';
 
 export default class POSuggestion extends React.Component {
@@ -7,53 +7,28 @@ export default class POSuggestion extends React.Component {
     super(props);
     this.state = {
       budget: '',
-      data: []
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSuggest = this.handleSuggest.bind(this)
-    this.handleDownload = this.handleDownload.bind(this)
+      product: []
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSuggest = this.handleSuggest.bind(this);
+    this.handleDownload = this.handleDownload.bind(this);
   }
 
   handleChange(e) {
-    this.setState({ budget: e.target.value })
+    this.setState({ budget: e.target.value });
   }
 
   handleSuggest() {
-
-    //send fetch request with post
-    //respond, set list to state
-
-    fetch(`/api/products-suggest`, {
-      method: POST,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
+    fetch(`/api/po-suggest?budget=${this.state.budget}`)
       .then(res => res.json())
       .then(data => {
-        console.log("data", data)
-
+        this.setState({ product: data });
       })
-      .catch(err => console.error(err))
-
-      //check inv for ANTHING lower than 20 qty from the budget
-      //---with sku, name, cost, qty
-      //---anything with that value, we can count and compare current inventory by the cost
-
-      //use where clause looking for qty <= 20
-
-      //if budget is lower, then buy all
-      //ex. 3 items - each item 10, 15, 18 units. first item, 8, second item 3, 3rd item, 2.
-      //if total price > budget, count the percentage
-      // divide total count by budget
-
-      //copy component for the location-table.jsx, change table render to sku, name, total cost, qty
-
+      .catch(err => console.error(err));
   }
 
   handleDownload() {
-    this.csvLink.link.click()
+    this.csvLink.link.click();
   }
 
   render() {
@@ -63,7 +38,7 @@ export default class POSuggestion extends React.Component {
           <form onSubmit={this.handleChange}>
             <div className="d-flex justify-content-center align-items-center">
               Estimated Budget:
-            <div>
+              <div>
                 <input
                   type="number"
                   className="form-control form-control-sm ml-2"
@@ -80,18 +55,27 @@ export default class POSuggestion extends React.Component {
 
         <div className="d-flex justify-content-center align-items-center">
           <button className="add-product btn-blue m-3" onClick={this.handleSuggest}>Suggest</button>
-          <button className="add-product btn-blue m-3" onClick={this.handleDownload}>Download</button>
+          {this.state.product.length !== 0
+            ? <div>
+              <button className="btn-blue m-3" onClick={this.handleDownload}>Download</button>
+              <CSVLink
+                data={this.state.product}
+                filename="poSuggest.csv"
+                className="hidden"
+                ref={r => this.csvLink = r}
+                target="_blank" />
+            </div>
+            : <button className="btn-grey m-3">Download</button>
+          }
         </div>
-
-
         <div>
-          {this.state.data.length !== 0
-            ? <Table product={this.state.data} />
+          {this.state.product.length !== 0
+            ? <PoTable product={this.state.product} />
             : <p className="d-none"></p>}
         </div>
 
       </div>
-    )
+    );
   }
 
 }
