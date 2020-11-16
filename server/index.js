@@ -21,8 +21,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// res.download
-
 const app = express();
 
 app.use(staticMiddleware);
@@ -135,32 +133,43 @@ app.post('/api/uploads', upload.single('csvUpload'), (req, res, next) => {
 });
 
 app.post('/api/products-location', (req, res, next) => {
-  let skuList = '';
+  const skuList = [];
   req.body.forEach(product => {
-    req.body.indexOf(product) === req.body.length - 1
-      ? skuList += `${product.sku}`
-      : skuList += `${product.sku}, `;
+    skuList.push(product.sku);
   });
 
   const sql = `
   select "productId",
   "sku",
   "color",
-  "location"
+  "location",
+  "qty"
   from "products"
-  where "sku" ILIKE $1
-  order by "location"
-  returning *
   `;
 
-  const value = [skuList];
-  console.log(skuList, value);
+  let whereSql = 'where "sku" IN (';
+  const value = [];
 
-  db.query(sql, value)
+  skuList.forEach((sku, index) => {
+    value.push(`${sku}`);
+    index === skuList.length - 1
+      ? whereSql += `$${index + 1})
+        order by "location"`
+      : whereSql += `$${index + 1}, `;
+  });
+
+  db.query(`${sql} ${whereSql}`, value)
     .then(result => {
-      const product = result.rows;
-      Object.assign(product, req.body);
-      res.status(200).json(product);
+      const products = result.rows;
+      products.map(product => {
+        req.body.forEach(reqProduct => {
+          if (reqProduct.sku === product.sku) {
+            const qty = reqProduct.qty;
+            product.qty = qty;
+          }
+        });
+      });
+      res.status(200).json(products);
     })
     .catch(err => console.error(err));
 });
@@ -296,24 +305,6 @@ app.get('/api/products-filter', (req, res, next) => {
       } else {
         res.status(200).json(result.rows);
       }
-    })
-    .catch(err => console.error(err));
-
-});
-
-app.get('/api/products-category', (req, res, next) => {
-  const sql = `
-    select "p"."qty" as "quantity",
-           "p"."cost",
-           "c"."categoryName" as "category"
-      from "products" as "p"
-      join "category" as "c" using ("categoryId")
-  `;
-
-  db.query(sql)
-    .then(result => {
-      const product = result.rows;
-      res.status(200).json(product);
     })
     .catch(err => console.error(err));
 
