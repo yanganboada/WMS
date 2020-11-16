@@ -17,7 +17,8 @@ export default class GeneratePickList extends React.Component {
 
   handleFileChange(e) {
     this.setState({
-      csvFile: e.target.files[0]
+      csvFile: e.target.files[0],
+      product: []
     });
   }
 
@@ -57,8 +58,8 @@ export default class GeneratePickList extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="d-flex justify-content-center">
+      <div className='container'>
+        <div className="row card">
           <form encType="multipart/form-data" className="row justify-content-between m-2" onSubmit={this.handleGenerate}>
             <div className="custom-file m-2">
               <input
@@ -84,16 +85,18 @@ export default class GeneratePickList extends React.Component {
             }
           </form>
           {this.state.product.length
-            ? <div className='row justify-content-center'>
-              <button className="add-product btn-blue m-4" onClick={this.handleDownload}>
-                Download
-              </button>
-              <CSVLink
-                data={this.state.product}
-                filename="pickList.csv"
-                className="hidden"
-                ref={r => this.csvLink = r}
-                target="_blank" />
+            ? <div>
+              <div className='row justify-content-center'>
+                <button className="btn-blue text-center mb-4" onClick={this.handleDownload}>
+                  Download
+                </button>
+                <CSVLink
+                  data={this.state.product}
+                  filename="pickList.csv"
+                  className="hidden"
+                  ref={r => this.csvLink = r}
+                  target="_blank" />
+              </div>
               <LocationTable product={this.state.product} />
             </div>
             : <div></div>

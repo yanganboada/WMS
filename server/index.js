@@ -21,8 +21,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// res.download
-
 const app = express();
 
 app.use(staticMiddleware);
@@ -135,31 +133,44 @@ app.post('/api/uploads', upload.single('csvUpload'), (req, res, next) => {
 });
 
 app.post('/api/products-location', (req, res, next) => {
-  let skuList = '';
+  const skuList = [];
   req.body.forEach(product => {
-    req.body.indexOf(product) === req.body.length - 1
-      ? skuList += `${product.sku}`
-      : skuList += `${product.sku}, `;
+    skuList.push(product.sku);
   });
   console.log("req.body", req.body)
 
   const sql = `
-    select "productId",
-           "sku",
-           "color",
-           "location"
-      from "products"
-      where "sku" IN ($1)
-      order by "location"
+  select "productId",
+  "sku",
+  "color",
+  "location",
+  "qty"
+  from "products"
   `;
 
-  const value = [skuList];
+  let whereSql = 'where "sku" IN (';
+  const value = [];
 
-  db.query(sql, value)
+  skuList.forEach((sku, index) => {
+    value.push(`${sku}`);
+    index === skuList.length - 1
+      ? whereSql += `$${index + 1})
+        order by "location"`
+      : whereSql += `$${index + 1}, `;
+  });
+
+  db.query(`${sql} ${whereSql}`, value)
     .then(result => {
-      const product = result.rows;
-      Object.assign(product, req.body);
-      res.status(200).json(product);
+      const products = result.rows;
+      products.map(product => {
+        req.body.forEach(reqProduct => {
+          if (reqProduct.sku === product.sku) {
+            const qty = reqProduct.qty;
+            product.qty = qty;
+          }
+        });
+      });
+      res.status(200).json(products);
     })
     .catch(err => console.error(err));
 });
