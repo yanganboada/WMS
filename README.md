@@ -50,8 +50,8 @@ Coming Soon!
 * User can view inventory by category report as a graph - Front End
 * User can import sku quantity to generate a downloadable pick list with product's location - Back End
 * User can import sku quantity to generate a downloadable pick list with product's location - Front End
-* User can get estimate PO by budget front end - Back End
-* User can get estimate PO by budget front end - Front End
+* User can get estimate PO by budget - Back End
+* User can get estimate PO by budget - Front End
 
 ## Getting Started
 1. Clone the repository.
