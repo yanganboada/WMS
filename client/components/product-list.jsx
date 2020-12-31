@@ -8,7 +8,7 @@ export default class ProductList extends React.Component {
     this.state = {
       product: [],
       filterValue: '',
-      filterName: '',
+      filterName: 'sku',
       isFilter: false,
       filterProduct: [],
       errorMessage: false,
@@ -91,7 +91,7 @@ export default class ProductList extends React.Component {
 
             <form onSubmit={this.handleChangeFilterName}>
               <select className="form-control mr-3 filter-drop-down" onChange={this.handleChangeFilterName}>
-                <option>Filter</option>
+                <option disabled>Filter</option>
                 <option value="sku">SKU</option>
                 <option value="name">Name</option>
                 <option value="category">Category</option>
@@ -127,7 +127,6 @@ export default class ProductList extends React.Component {
             : <Table product={this.state.product} setView={this.props.setView} />
           }
         </div>
-
 
       </div>
 

@@ -55,7 +55,7 @@ export default class Table extends React.Component {
 
     this.setState({
       currentSort: nextSort,
-      currentColumn: e.target.id
+      currentColumn: e.currentTarget.id
     });
 
   }
